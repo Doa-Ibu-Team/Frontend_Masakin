@@ -1,0 +1,57 @@
+@font-face {
+    font-family: Airbnb ;
+    src: url("../../assets/fonts/AirbnbCerealMedium.ttf");
+}
+
+@font-face {
+    font-family: Inter;
+    src: url("../../assets/fonts/inter/Inter-Medium.ttf");
+}
+.box-main {
+    width: 100%;
+}
+.side-box {
+    float: left;
+    width: 60%;
+}
+.box-transparent {
+    position: absolute;
+    background-color: #EFC81A; 
+    width: 60%;
+    height: 1805px;
+    opacity: 70%;
+}
+.side-img {
+    width: 100%;
+    height: 1805px;
+}
+.logo {
+    position: absolute; 
+    top: 100%; 
+    left: 50%;
+    transform: translate(-210%, 30%);
+}
+.text-brand {
+    position: absolute;
+    color: #ffffff;
+    font-family: Airbnb;
+    left: 50%;
+    font-size: 18px; 
+    font-weight: 800px;
+    transform: translate(-300%, 950px);
+}
+.box-right {
+    float: left;
+}
+.box-form {
+    position: absolute;
+    backgroundColor: #ffffff;
+    color: #696F79;
+    width: 50%;
+    font-family: Inter;
+}
+.my-form {
+    width: 50%;
+    left: 50%; 
+    transform: translate(50%, 150px);
+}
