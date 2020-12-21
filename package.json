@@ -1,15 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "masakin-fe",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "bootstrap": "^4.5.3",
-    "dotenv": "^8.2.0",
-=======
   "name": "frontend-masakin",
   "version": "0.1.0",
   "private": true,
@@ -18,7 +7,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "bootstrap": "^4.5.3",
->>>>>>> 62f4baaf6bf70f846fc961787122db1386d766b3
+    "dotenv": "^8.2.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
