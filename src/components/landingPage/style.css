@@ -1,0 +1,250 @@
+.bg-content {
+  background-color: #efc81a;
+  height: 700px;
+}
+.container-content-left {
+  padding-left: 13%;
+  padding-top: 15%;
+}
+.title-content {
+  color: #2e266f;
+  font-size: 52px;
+}
+.img-title {
+  position: absolute;
+  width: 90%;
+  /* height:80%; */
+  top: 100px;
+  left: -150px;
+}
+
+.input-search {
+  width: 300px;
+  height: 40px;
+  position: relative;
+  /* overflow: hidden; */
+}
+.icon-search {
+  position: absolute;
+  left: 0;
+  margin-left: 8px;
+  margin-top: 12px;
+  color: #9b9b9b;
+}
+.input-search-field::placeholder {
+  font-size: 12px;
+  padding-left: 40px;
+  color: #efefef;
+}
+.session-tag {
+  border-left: #efc81a 10px solid;
+  font-size: 36px;
+  padding: 10px 0 10px 10px;
+}
+.container-content {
+  padding-left: 13%;
+}
+.img-content {
+  position: absolute;
+  margin-top: -30px;
+  margin-left: -30px;
+  border-radius: 20px;
+  width: 400px;
+  height: 400px;
+}
+.border-img {
+  margin-top: 100px;
+  width: 400px;
+  height: 400px;
+  border: #efc81a 3px solid;
+  border-radius: 10px;
+}
+.title-recomen {
+  font-weight: 600;
+  margin-top: 100px;
+  font-size: 56px;
+}
+.line {
+  margin: 20px 0 25px 0;
+  width: 100px;
+  border-top: 1px solid #6f6a40;
+}
+.desc-content {
+  font-size: 24px;
+  font-weight: lighter;
+  margin-bottom: 40px;
+}
+.button-content {
+  background-color: #efc81a;
+  padding: 9px 15px;
+}
+.rectangle {
+  margin-top: 40px;
+  position: absolute;
+  left: 0;
+  width: 340px;
+  height: 400px;
+  background-color: #efc81a;
+}
+.img-content-recipe {
+  position: absolute;
+  margin-left: 130px;
+  margin-top: 50px;
+  border-radius: 20px;
+  width: 400px;
+  height: 400px;
+}
+.gap-content {
+  margin-top: 150px;
+}
+.galery {
+  width: 80%;
+  margin: 50px auto 100px;
+  /* margin: auto; */
+  /* border: 2px solid orangered; */
+  list-style: none;
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+}
+.feed-food {
+  display: block;
+  width: 100% !important;
+  height: 300px;
+  margin-left: -25px;
+}
+.text-block {
+  margin-top: -80px;
+  color: white;
+  padding-left: 10px;
+}
+
+footer {
+  background-color: #efc81a;
+  height: 1005;
+}
+.title-footer {
+  color: #2e266f;
+  font-size: 64px;
+  padding: 90px 0 10px 0;
+}
+.desc-footer {
+  font-size: 24px;
+  color: #707070;
+  font-weight: lighter;
+}
+.footer-nav {
+  margin-top: 70px;
+  font-size: 16px;
+  color: #707070;
+}
+.footer-text {
+  color: #707070;
+}
+
+/* Medium  */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .img-title {
+    width: 60%;
+    top: 100px;
+    left: 90px;
+  }
+  .border-img {
+    margin-left: -40px;
+  }
+  .img-content {
+    margin-left: -20px;
+    width: 300px;
+    height: 300px;
+  }
+  .border-img {
+    width: 300px;
+    height: 300px;
+  }
+  .img-content-recipe {
+    width: 300px;
+    height: 300px;
+    margin-left: 60px;
+    margin-top: 50px;
+  }
+  .rectangle {
+    margin-top: 40px;
+    width: 240px;
+    height: 300px;
+  }
+  .title-content {
+    font-size: 30px;
+  }
+  .session-tag {
+    font-size: 30px;
+  }
+  .title-recomen {
+    margin-top: 100px;
+    font-size: 30px;
+  }
+  .desc-content {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .title-footer {
+    font-size: 28px;
+  }
+  .desc-footer {
+    font-size: 18px;
+  }
+  .footer-nav {
+    margin-top: 30px;
+    font-size: 16px;
+  }
+}
+/* Small */
+@media (max-width: 767.98px) {
+  .bg-content {
+    background-color: #efc81a;
+    height: 500px;
+    width: 100%;
+  }
+  .img-title {
+    width: 57%;
+    top: 40px;
+    left: 20%;
+  }
+  .media-small {
+    margin-top: 500px;
+    margin-bottom: -90px;
+    margin-left: 50px;
+  }
+  .media-small-pop {
+    margin-left: 50px;
+  }
+  .md-session-tag {
+    margin-top: 40px !important;
+  }
+  .title-content {
+    font-size: 30px;
+  }
+  .session-tag {
+    font-size: 30px;
+  }
+  .title-recomen {
+    margin-top: 100px;
+    font-size: 30px;
+  }
+  .desc-content {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+  .title-footer {
+    font-size: 28px;
+  }
+  .desc-footer {
+    font-size: 18px;
+  }
+  .footer-nav {
+    margin-top: 30px;
+    font-size: 16px;
+  }
+  .footer-text {
+    color: #707070;
+  }
+}
