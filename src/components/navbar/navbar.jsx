@@ -19,13 +19,13 @@ class navbar extends Component {
                                     <a
                                         className='nav-link active'
                                         aria-current='page'
-                                        href='#home'
+                                        href='/'
                                     >
                                         Home
                                     </a>
                                 </li>
                                 <li className='nav-item'>
-                                    <a className='nav-link' href='#add'>
+                                    <a className='nav-link' href='addRecipe'>
                                         Add Recipe
                                     </a>
                                 </li>
