@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
 import { withRouter } from "react-router-dom";
 import css from "./Header.module.css";
 
@@ -55,48 +54,6 @@ class navbar extends Component {
             </header>
         );
     }
-=======
-import { Navbar, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
-class navbar extends Component {
-  render() {
-    return (
-      <Navbar fixed="top" variant="light" bg="white">
-        <div className="d-flex flex-row justify-content-around">
-          <div className="row">
-            <Nav className="mr-auto ml-5">
-              <Link to="/">
-                <Nav.Link
-                  href="/"
-                  style={{ fontWeight: "500", fontSize: "20px" }}
-                >
-                  Home
-                </Nav.Link>
-              </Link>
-              <Link to="/addRecipe">
-                <Nav.Link
-                  href="/addRecipe"
-                  style={{ fontWeight: "500", fontSize: "20px" }}
-                >
-                  Add Recipe
-                </Nav.Link>
-              </Link>
-              <Link to="/login">
-                <Nav.Link
-                  href="/login"
-                  style={{ fontWeight: "500", fontSize: "20px" }}
-                >
-                  Profile
-                </Nav.Link>
-              </Link>
-            </Nav>
-          </div>
-        </div>
-      </Navbar>
-    );
-  }
->>>>>>> 88e0e79cb2a9a05ea7173b3218f4d91d6630fcd4
 }
 
 export default navbar;
