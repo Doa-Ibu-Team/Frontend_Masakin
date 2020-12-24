@@ -8,17 +8,20 @@ class addRecipe extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            file: null
+            file: null,
+            fileUpload: []
         }
         this.handleFile = this.handleFile.bind(this)
     }
     handleFile(event) {
         this.setState({
-            file: URL.createObjectURL(event.target.files[0])
+            file: URL.createObjectURL(event.target.files[0]),
+            fileUpload: event.target.files
         })
     }
 
     render() {
+        console.log(this.state)
         return (
             <div className='container'>
                 <div className="card border-white mb4" style={{ width: "99%", height: "auto", marginTop: "50px", marginLeft: "70px" }}>
