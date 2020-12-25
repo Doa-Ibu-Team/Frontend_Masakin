@@ -5,9 +5,10 @@ import Home from "../pages/home/Home";
 import Login from "./auth/Login"
 import Register from "./auth/Register"
 import ForgotPass from "./auth/ForgotPass"
-import AddRecipe from "./addRecipe/addRecipe";
+import AddRecipe from "./recipe/addRecipe";
 import SearchPage from './search/search'
 import Profile from "./profile/profile";
+import DetailRecipe from "../pages/recipe/DetailRecipe";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/register" component={Register} />
         <Route path="/forgot-password" component={ForgotPass} />
         <Route path="/addRecipe" component={AddRecipe} />
+        <Route exact path='/detail/:id' component={DetailRecipe} />
         <Route path="/search" component={SearchPage} />
         <Route path="/profile" component={Profile} />
       </BrowserRouter>
