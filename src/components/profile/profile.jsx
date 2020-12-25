@@ -7,59 +7,6 @@ import ImageProfile from "../../assets/images/profile/profile.png";
 import EditProfileBtn from "../../assets/icons/edit-image.png";
 
 class Profile extends Component {
-//   state = {
-//     showEdit: false,
-//     profile: {},
-//   };
-
-//   myListActive = (e) => {
-//     const ListId = e.target.dataset.id;
-//     const buttons = document.querySelectorAll("." + profile.ItemTitle);
-//     const contentPartSection = document.querySelectorAll(
-//       "." + profile.ItemList
-//     );
-//     // remove class active-type and show-section
-//     buttons.forEach((item) => item.classList.remove(profile.ItemTitleActive));
-//     contentPartSection.forEach((item) =>
-//       item.classList.remove(profile.ItemListActive)
-//     );
-//     // add class active-type and show-section
-//     e.target.classList.add(profile.ItemTitleActive);
-//     document.querySelector(`#${ListId}`).classList.add(profile.ItemListActive);
-//   };
-
-//   updateEditSection = () => {
-//     if (this.state.showEdit) {
-//       this.setState({
-//         showEdit: false,
-//       });
-//     } else {
-//       this.setState({
-//         showEdit: true,
-//       });
-//     }
-//   };
-
-//   getUser = async () => {
-//     const userid = await localStorage.getItem("userId");
-//     axios
-//       .get(`http://localhost:5000/user/${userid}`)
-//       .then((res) => {
-//         const profile = res.data.data[0];
-//         this.setState({
-//           profile: profile,
-//         });
-//         //console.log(res.data.data[0]);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-
-//   componentDidMount = () => {
-//     this.getUser();
-//   };
-
   render() {
     // console.log(this.state.profile);
     return (
