@@ -21,9 +21,9 @@ class addRecipe extends Component {
         this.state = {
             title: '',
             ingredients: '',
-            video: [],
+            videos: [],
             file: null,
-            fileUpload: [],
+            img: [],
             dataInserted: false
         }
         this.handleFile = this.handleFile.bind(this)
@@ -36,13 +36,13 @@ class addRecipe extends Component {
     handleFile(event) {
         this.setState({
             file: URL.createObjectURL(event.target.files[0]),
-            fileUpload: event.target.files
+            img: event.target.files
         })
     }
 
     handleVideo(event) {
         this.setState({
-            video: event.target.files
+            videos: event.target.files
         })
     }
 
@@ -52,15 +52,15 @@ class addRecipe extends Component {
         formdata.append('user_id', localStorage.getItem('user_id'))
         formdata.append('title', this.state.title)
         formdata.append('ingredients', this.state.ingredients)
-        for (let i = 0; i < this.state.fileUpload.length; i++) {
-            formdata.append('fileUpload', this.state.fileUpload)
+        for (let i = 0; i < this.state.img.length; i++) {
+            formdata.append('img', this.state.img[i])
         }
-        for (let i = 0; i < this.state.video.length; i++) {
-            formdata.append("video", this.state.video[i]);
+        for (let i = 0; i < this.state.videos.length; i++) {
+            formdata.append("videos", this.state.videos[i]);
         }
         console.log(formdata)
         e.preventDefault()
-        axios.post(baseUrl + '/recipe/b/add', formdata)
+        axios.post(baseUrl + '/recipe/b/add', formdata, config)
             .then(response => {
                 console.log(response)
                 this.setState({
@@ -75,7 +75,7 @@ class addRecipe extends Component {
 
     render() {
         console.log(this.state)
-        const { user_id, title, ingredients, fileUpload, video } = this.state
+        const { user_id, title, ingredients, img, videos } = this.state
         return (
             <div className='container'>
                 {/* {this.state.dataInserted && <Redirect to="/profile" />} */}
@@ -87,7 +87,7 @@ class addRecipe extends Component {
                                 <div className="col-md-8 row">
                                     <img src={squareImg} alt="" />
                                     <div className={css.UploadBtn}>Add Photo</div>
-                                    <input type="file" name='fileUpload' onChange={this.handleFile} autoComplete='off' placeholder="" />
+                                    <input type="file" name='img' onChange={this.handleFile} autoComplete='off' placeholder="" />
                                     <img src={this.state.file} />
                                 </div>
                             </Jumbotron>
@@ -98,7 +98,7 @@ class addRecipe extends Component {
                                 <Form.Control as="textarea" rows={10} name='ingredients' value={ingredients} onChange={this.changeHandler} autoComplete='off' placeholder="Ingredients" style={{ background: '#F6F5F4' }} />
                             </Form.Group>
                             <Form.Group controlId="formBasicText" style={{ margin: '2rem auto 2rem auto' }}>
-                                <Form.Control type="file" name='video' onChange={this.handleVideo} autoComplete='off' placeholder="Video" style={{ background: '#F6F5F4' }} />
+                                <Form.Control type="file" name='videos' onChange={this.handleVideo} autoComplete='off' placeholder="Videos" style={{ background: '#F6F5F4' }} multiple />
                             </Form.Group>
                             <div className='d-flex justify-content-center'>
                                 <Button variant="warning" type="submit" style={{ width: '300px' }}>
