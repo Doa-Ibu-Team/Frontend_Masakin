@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link,withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import css from "./Header.module.css";
 
 class navbar extends Component {
@@ -16,24 +16,28 @@ class navbar extends Component {
                         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
                             <ul className={`navbar-nav mb-2 mt-4 mb-lg-0 ${css.MainNav}`}>
                                 <li className='nav-item'>
-                                    <a
-                                        className='nav-link active'
-                                        aria-current='page'
-                                        href='/'
-                                    >
-                                        Home
+                                    <Link to="/">
+                                        <a
+                                            className='nav-link active'
+                                            aria-current='page'
+                                            style={{color:"black"}}
+                                        >
+                                            Home
                                     </a>
+                                    </Link>
                                 </li>
                                 <li className='nav-item'>
-                                    <a className='nav-link' href='addRecipe'>
-                                        Add Recipe
-                                    </a>
+                                    <Link to="/addRecipe" >
+                                        <a className='nav-link' style={{color:"black"}}>Add Recipe</a>
+                                    </Link>
                                 </li>
+
                                 <li className='nav-item'>
-                                    <a className='nav-link' href='profile'>
-                                        Profile
-                                    </a>
+                                    <Link to="/profile">
+                                        <a className='nav-link' style={{color:"black"}}>PROFILE</a>
+                                    </Link>
                                 </li>
+
                             </ul>
                             <ul className={`navbar-nav mb-2 mt-4 ms-auto mb-lg-0 ${css.Auth}`}>
                                 <li className='nav-item' onClick={() => this.props.history.push('/login')}>

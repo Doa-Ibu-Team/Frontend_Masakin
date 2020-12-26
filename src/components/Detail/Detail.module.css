@@ -20,7 +20,7 @@
 	right: 15px;
 }
 
-.SavedButton, .LikedButton {
+.SavedButton, .LikedButton, .UnlikedButton, .UnsavedButton {
 	height: 42px;
 	width: 42px;
 	cursor: pointer;
@@ -33,12 +33,24 @@
 .SavedButton {
 	background-color: #EFC81A;
 }
-
-.LikedButton {
+.UnsavedButton {
 	background-color: #FFFFFF;
 }
 
+.LikedButton {
+	background-color: #EFC81A;
+}
+
+.UnlikedButton {
+	background-color: #FFFFFF;
+}
 .SavedButton img {
+	margin-top: 8px;
+	margin-left: 11px;
+	width: 20px;
+	height: 26px;
+}
+.UnsavedButton img {
 	margin-top: 8px;
 	margin-left: 11px;
 	width: 20px;
@@ -46,6 +58,13 @@
 }
 
 .LikedButton img {
+	margin-top: 5px;
+	margin-left: 6px;
+	width: 30px;
+	height: 30px;
+}
+
+.UnlikedButton img {
 	margin-top: 5px;
 	margin-left: 6px;
 	width: 30px;
@@ -78,9 +97,10 @@
 
 .VideoItem {
 	margin-top: 20px;
-	max-width: 300px;
-	height: 90px;
-	background-color: #EFC81A;
+	margin-bottom: 20px;
+	max-width: 640px;
+	height: 360px;
+	background-color: #004041;
 	border-radius: 15px;
 	text-align: center;
 }
@@ -141,6 +161,16 @@
 .CommentUserText {
 	font-family: 'Airbnb Cereal App Light';
 }
+
+.PlayerWrapper {
+	position: relative;
+	/* margin-left: 50px; */
+	margin-top: 10px;
+	margin-bottom: 20px;
+	border-radius: 50px;
+	width: 640px;
+	height: 360px;
+  }
 
 @media only screen and ( max-width: 1076px ) {
 	.CommentForm {

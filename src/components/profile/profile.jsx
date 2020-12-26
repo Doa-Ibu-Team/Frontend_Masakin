@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import axios from "axios";
+import { Link } from 'react-router-dom'
 
 import profile from "./Profile.module.css";
 import ImageProfile from "../../assets/images/profile/profile.png";
@@ -38,7 +39,7 @@ class Profile extends Component {
   };
 
   getMyRecipe = () => {
-    axios.get(baseUrl + `/recipe/b/myRecipe/`, config)
+    axios.get(baseUrl + `/user/myRecipe/`, config)
       .then((res) => {
         console.log(res.data)
         this.setState({
@@ -51,7 +52,7 @@ class Profile extends Component {
   }
 
   likedRecipe = () => {
-    axios.get(baseUrl + '/recipe/b/likedRecipe', config)
+    axios.get(baseUrl + '/user/getLike', config)
       .then((res) => {
         console.log(res.data)
         this.setState({
@@ -64,7 +65,7 @@ class Profile extends Component {
   }
 
   savedRecipe = async () => {
-    axios.get(baseUrl + '/recipe/b/bookmarkedRecipe', config)
+    axios.get(baseUrl + '/user/getbookmark', config)
       .then((res) => {
         console.log(res.data)
         this.setState({
@@ -80,7 +81,7 @@ class Profile extends Component {
     this.getMyRecipe()
     this.savedRecipe()
     this.likedRecipe()
-    
+
   }
 
   render() {
@@ -143,10 +144,14 @@ class Profile extends Component {
               {myrecipe && myrecipe.map(({ id_recipe, title, img }) => {
                 return (
                   <>
-                    <div href="/recipe" className={profile.CardList}>
-                      <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
-                      <h1>{title}</h1>
-                    </div>
+                    <Link to={{
+                      pathname: `/recipe/${id_recipe}`
+                    }}>
+                      <div href="/recipe" className={profile.CardList}>
+                        <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
+                        <h1>{title}</h1>
+                      </div>
+                    </Link>
                   </>
                 )
               })
@@ -159,10 +164,14 @@ class Profile extends Component {
               {savedrecipe && savedrecipe.map(({ id_recipe, title, img }) => {
                 return (
                   <>
-                    <div href="/recipe" className={profile.CardList}>
-                      <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
-                      <h1>{title}</h1>
-                    </div>
+                    <Link to={{
+                      pathname: `/recipe/${id_recipe}`
+                    }}>
+                      <div href="/recipe" className={profile.CardList}>
+                        <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
+                        <h1>{title}</h1>
+                      </div>
+                    </Link>
                   </>
                 );
               })}
@@ -175,10 +184,14 @@ class Profile extends Component {
                 likedrecipe && likedrecipe.map(({ id_recipe, title, img }) => {
                   return (
                     <>
-                      <div href="/recipe" className={profile.CardList}>
-                        <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
-                        <h1>{title}</h1>
-                      </div>
+                      <Link to={{
+                        pathname: `/recipe/${id_recipe}`
+                      }}>
+                        <div href="/recipe" className={profile.CardList}>
+                          <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
+                          <h1>{title}</h1>
+                        </div>
+                      </Link>
                     </>
                   )
                 })

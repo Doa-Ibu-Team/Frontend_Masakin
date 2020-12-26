@@ -25,7 +25,7 @@ const Router = () => {
         <Route path="/code-reset" component={CodeReset} />
         <Route path="/reset-password" component={ResetPass} />
         <Route path="/addRecipe" component={AddRecipe} />
-        <Route exact path='/detail/:id' component={DetailRecipe} />
+        <Route exact path='/recipe/:id' component={DetailRecipe} />
         <Route path="/search" component={SearchPage} />
         <Route path="/profile" component={Profile} />
       </BrowserRouter>
