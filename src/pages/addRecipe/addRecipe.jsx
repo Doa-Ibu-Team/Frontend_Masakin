@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../../components/navbar/navbar';
 import AddRecipe from '../../components/addRecipe/addRecipe'
+import Footer from '../../components/landingPage/footer'
 import { Container } from "react-bootstrap"
 function addRecipe() {
     return (
@@ -13,6 +14,7 @@ function addRecipe() {
                         </div>
                     </div>
                 </Container>
+                <Footer />
             </>
     );
 }

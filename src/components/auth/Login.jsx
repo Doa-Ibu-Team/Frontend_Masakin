@@ -22,14 +22,16 @@ class Login extends Component {
             password: this.password
         }
         e.preventDefault()
-        axios.post(base_url + 'auth/login', data)
+        axios.post(base_url + '/auth/login', data)
             .then((res) => {
                 this.setState({
                     isLogin: true
                 })
                 localStorage.setItem("token", res.data.tokenId);
                 res.headers["x-access-token"] = res.data.tokenId;
-                localStorage.setItem("email", res.data.email);
+                localStorage.setItem("user_ID", res.data.id_user);
+                localStorage.setItem("name", res.data.name);
+
                 dispatch(setLogin());
                 swal("Login Berhasil");
 

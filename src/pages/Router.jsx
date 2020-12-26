@@ -2,10 +2,12 @@ import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import Home from "../pages/home/Home";
-import Login from "../pages/auth/Login"
-import Register from "../pages/auth/Register"
-import ForgotPass from "../pages/auth/ForgotPass"
-import AddRecipe from "../pages/addRecipe/addRecipe";
+import Login from "./auth/Login"
+import Register from "./auth/Register"
+import ForgotPass from "./auth/ForgotPass"
+import AddRecipe from "./addRecipe/addRecipe";
+import SearchPage from './search/search'
+import Profile from "./profile/profile";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 import CodeReset from "./auth/CodeReset";
@@ -22,6 +24,8 @@ const Router = () => {
         <Route path="/code-reset" component={CodeReset} />
         <Route path="/reset-password" component={ResetPass} />
         <Route path="/addRecipe" component={AddRecipe} />
+        <Route path="/search" component={SearchPage} />
+        <Route path="/profile" component={Profile} />
       </BrowserRouter>
     </Provider>
   );
