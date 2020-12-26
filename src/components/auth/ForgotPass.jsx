@@ -2,13 +2,47 @@ import React, { Component } from 'react'
 import './style.css'
 import { Logo } from '../../assets'
 import { Form, Button } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios'
+import swal from 'sweetalert'
+import { connect } from "react-redux";
+import { setForgotPass } from '../../redux/actions/Auth'
 
-export default class ForgotPass extends Component {
+const base_url = process.env.REACT_APP_BASE_URL
+console.log(base_url)
+
+class ForgotPass extends Component {
+  state = {
+    isForgot: false
+  }
+  handleSubmit = (e) => {
+    const {dispatch} = this.props;
+    const data = {
+        email: this.email
+    }
+    e.preventDefault()
+    axios.post(base_url + 'auth/forgot_password', data)
+        .then((res) => {
+            this.setState({
+                isForgot: true
+            })
+            localStorage.setItem("email", res.data.email);
+            localStorage.setItem("linkReset", res.data.message);
+            dispatch(setForgotPass());
+            swal("Sent Berhasil");
+
+        }).catch((error) => {
+            console.log(error)
+            swal("Sent Gagal!")
+        })
+}
     render() {
+      console.log(localStorage)
+      const { auth } = this.props;
         return (
     <>
       <div className="main">
+      {auth.isForgot && <Redirect to="/code-reset" />}
         <div className="left-content">
           <div className="rectangle-overlay"></div>
           <div className="logo-login">
@@ -26,10 +60,12 @@ export default class ForgotPass extends Component {
                 <Form.Control
                   className="shadow"
                   type="email"
+                  name="email"
+                  onChange={(e) => (this.email = e.target.value)}
                   placeholder="examplexxx@gmail.com"
+
                 />
               </Form.Group>
-              <Link to="/login">
                 <Button
                     type="submit"
                     style={{
@@ -37,11 +73,9 @@ export default class ForgotPass extends Component {
                     backgroundColor: "#EFC81A",
                     padding: "15px",
                     }}
-                >
-            
+                    onClick={this.handleSubmit}>
                     Send E-mail
                 </Button>
-              </Link>
             </Form>
           </div>
         </div>
@@ -57,10 +91,11 @@ export default class ForgotPass extends Component {
                 <Form.Control
                   className="shadow"
                   type="email"
+                  name="email"
+                  onChange={(e) => (this.email = e.target.value)}
                   placeholder="examplexxx@gmail.com"
                 />
               </Form.Group>
-              <Link to="/login">
                 <Button
                     type="submit"
                     style={{
@@ -68,11 +103,11 @@ export default class ForgotPass extends Component {
                     backgroundColor: "#EFC81A",
                     padding: "15px",
                     }}
+                    onClick={this.handleSubmit}
                 >
             
                     Send E-mail
                 </Button>
-              </Link>
             </Form>
           </div>
         </div>
@@ -81,3 +116,10 @@ export default class ForgotPass extends Component {
         )
     }
 }
+const mapStateToProps = ({ auth, newState }) => {
+  return {
+      auth,
+      newState
+  };
+};
+export default connect(mapStateToProps)(ForgotPass)
