@@ -10,6 +10,8 @@ import SearchPage from './search/search'
 import Profile from "./profile/profile";
 import { Provider } from "react-redux";
 import store from "../redux/store";
+import CodeReset from "./auth/CodeReset";
+import ResetPass from "./auth/ResetPass";
 
 const Router = () => {
   return (
@@ -19,6 +21,8 @@ const Router = () => {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/forgot-password" component={ForgotPass} />
+        <Route path="/code-reset" component={CodeReset} />
+        <Route path="/reset-password" component={ResetPass} />
         <Route path="/addRecipe" component={AddRecipe} />
         <Route path="/search" component={SearchPage} />
         <Route path="/profile" component={Profile} />

@@ -33,21 +33,24 @@ class Register extends Component {
         axios
             .post(base_url + 'auth/signup', data)
             .then((res) => {
-                localStorage.setItem("activatedHere", res.data.activateHere);
                 console.log(res)
+                localStorage.setItem("activatedHere", res.data.activateHere);
+                localStorage.setItem("email", res.data.email);
                 dispatch(setRegis());
-                swal("Register Berhasil")
+                swal("Selamat Register Berhasil! Sebelum Login silahkan aktivasi akun anda melalui email!")
             })
             .catch((err) => {
-                console.log(err);
+                if(err.response.data.status === 409)
+                {
+                    swal("Email Telah digunakan")
+                }
             });
 
         console.log(data);
+        console.log(data.email)
     };
     render() {
-        console.log(localStorage)
         const { auth } = this.props;
-        console.log(auth.newState)
         return (
             <>
         <div className="main">
@@ -63,7 +66,7 @@ class Register extends Component {
                 <h3 className="text-logo mt-4 ml-4">Mama recipe</h3>
             </div>
             <div className="box-form-left">
-            <Form className="my-form" onSubmit={this.handleSubmit}>
+            <Form className="my-form">
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
@@ -155,7 +158,7 @@ class Register extends Component {
                 <h4 style={{ color: "#EFC81A" }}>Welcome </h4>
                 <p>Login into your Existing account</p>
                 </div>
-                <Form className="my-form-right w-75" onSubmit={this.handleSubmit}>
+                <Form className="my-form-right w-75">
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
@@ -219,7 +222,7 @@ class Register extends Component {
                     width: "100%",
                     backgroundColor: "#EFC81A",
                     padding: "15px",
-                    height: "20px"
+                    height: "60px"
                     }}
                     onClick={this.handleSubmit}
                 >

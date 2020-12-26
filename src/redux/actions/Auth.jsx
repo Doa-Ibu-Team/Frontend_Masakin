@@ -27,3 +27,15 @@ export const setRegisFalse = () => {
         type: "REGISTER_FALSE"
     }
 }
+
+export const setForgotPass = (data) => {
+    return {
+        type: "FORGOT_PASS_TRUE"
+    }
+}
+
+export const setForgotPassFalse = (data) => {
+    return {
+        type: "FORGOT_PASS_FALSE"
+    }
+}
