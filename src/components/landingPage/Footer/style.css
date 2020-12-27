@@ -1,0 +1,35 @@
+.footer {
+  background-color: #efc81a;
+  /* height: 1005; */
+}
+.title-footer {
+  color: #2e266f;
+  font-size: 64px;
+  padding: 90px 0 10px 0;
+}
+.desc-footer {
+  font-size: 24px;
+  color: #707070;
+  font-weight: lighter;
+}
+.footer-nav {
+  margin-top: 70px;
+  font-size: 16px;
+  color: #707070;
+}
+.footer-text {
+  color: #707070;
+}
+
+/* Medium  */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .footer {
+    display: none;
+  }
+}
+/* Small */
+@media (max-width: 767.98px) {
+  .footer {
+    display: none;
+  }
+}
