@@ -2,13 +2,41 @@ import React, { Component } from 'react'
 import './style.css'
 import { Logo } from '../../assets'
 import { Form, Button } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios'
+import swal from 'sweetalert'
+import { setCodeReset, setCodeResetFalse } from '../../redux/actions/Auth'
+import { connect } from 'react-redux'
 
-export default class CodeReset extends Component {
+const base_url = process.env.REACT_APP_BASE_URL
+
+class CodeReset extends Component {
+  state = {
+    isCodeReset: false
+  }
+  handleSubmit = (e) => {
+    const {dispatch} = this.props;
+    const data = {
+        otp: this.otp,
+    }
+    e.preventDefault()
+    if(data.otp !== localStorage.getItem("otp")) {
+      dispatch(setCodeResetFalse())
+      swal("Code OTP is Wrong!")
+    }
+    else {
+      dispatch(setCodeReset());
+      localStorage.removeItem("otp")
+      swal("Code OTP True")
+    }
+}
     render() {
-        return (
+      console.log(localStorage)
+      const { auth } = this.props;
+    return (
     <>
       <div className="main">
+      {auth.isCodeReset && <Redirect to="/reset-password" />}
         <div className="left-content">
           <div className="rectangle-overlay"></div>
           <div className="logo-login">
@@ -22,14 +50,15 @@ export default class CodeReset extends Component {
           <div className="box-form-left">
           <Form className="my-form" style={{marginTop: "550px"}}>
               <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
+                <Form.Label>Code 6 Digit</Form.Label>
                 <Form.Control
                   className="shadow"
-                  type="email"
+                  type="text"
+                  name="code_reset"
                   placeholder=""
+                  // onChange={(e) => (this.otp = e.target.value)}
                 />
               </Form.Group>
-              <Link to="/reset-password">
                 <Button
                     type="submit"
                     style={{
@@ -37,11 +66,10 @@ export default class CodeReset extends Component {
                     backgroundColor: "#EFC81A",
                     padding: "15px",
                     }}
+                    // onClick={this.handleSubmit}
                 >
-            
                     Reset Password
                 </Button>
-              </Link>
             </Form>
           </div>
         </div>
@@ -54,9 +82,9 @@ export default class CodeReset extends Component {
                   className="shadow"
                   type="text"
                   placeholder=""
+                  onChange={(e) => (this.otp = e.target.value)}
                 />
               </Form.Group>
-              <Link to="/reset-password">
                 <Button
                     type="submit"
                     style={{
@@ -64,11 +92,11 @@ export default class CodeReset extends Component {
                     backgroundColor: "#EFC81A",
                     padding: "15px",
                     }}
+                    onClick={this.handleSubmit}
                 >
             
                     Reset Password
                 </Button>
-              </Link>
             </Form>
           </div>
         </div>
@@ -77,3 +105,10 @@ export default class CodeReset extends Component {
         )
     }
 }
+const mapStateToProps = ({ auth, newState }) => {
+  return {
+      auth,
+      newState
+  };
+};
+export default connect(mapStateToProps)(CodeReset)
