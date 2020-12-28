@@ -1,14 +1,93 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import axios from "axios";
+import { Link } from 'react-router-dom'
 
 import profile from "./Profile.module.css";
 import ImageProfile from "../../assets/images/profile/profile.png";
 import EditProfileBtn from "../../assets/icons/edit-image.png";
 
+const baseUrl = process.env.REACT_APP_BASE_URL
+const config = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    "x-access-token": "Bearer " + localStorage.getItem("token")
+  },
+}
+
 class Profile extends Component {
+  state = {
+    myrecipe: [],
+    likedrecipe: [],
+    savedrecipe: [],
+  }
+
+  myListActive = (e) => {
+    const ListId = e.target.dataset.id;
+    const buttons = document.querySelectorAll("." + profile.ItemTitle);
+    const contentPartSection = document.querySelectorAll(
+      "." + profile.ItemList
+    );
+    // remove class active-type and show-section
+    buttons.forEach((item) => item.classList.remove(profile.ItemTitleActive));
+    contentPartSection.forEach((item) =>
+      item.classList.remove(profile.ItemListActive)
+    );
+    // add class active-type and show-section
+    e.target.classList.add(profile.ItemTitleActive);
+    document.querySelector(`#${ListId}`).classList.add(profile.ItemListActive);
+  };
+
+  getMyRecipe = () => {
+    axios.get(baseUrl + `/user/myRecipe/`, config)
+      .then((res) => {
+        console.log(res.data)
+        this.setState({
+          myrecipe: res.data.data
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  likedRecipe = () => {
+    axios.get(baseUrl + '/user/getLike', config)
+      .then((res) => {
+        console.log(res.data)
+        this.setState({
+          likedrecipe: res.data.data
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  savedRecipe = async () => {
+    axios.get(baseUrl + '/user/getbookmark', config)
+      .then((res) => {
+        console.log(res.data)
+        this.setState({
+          savedrecipe: res.data.data
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  componentDidMount = () => {
+    this.getMyRecipe()
+    this.savedRecipe()
+    this.likedRecipe()
+
+  }
+
   render() {
     // console.log(this.state.profile);
+    const { myrecipe, savedrecipe, likedrecipe, } = this.state
+    console.log(this.state)
     return (
       <>
         <div className={profile.Section}>
@@ -27,13 +106,13 @@ class Profile extends Component {
           </div>
           <div className={"mx-auto text-center "}>
             <p className={profile.Username + " mt-2"}>
-              {/* {this.state.profile.name_user} */}
+              {localStorage.getItem('name')}
             </p>
           </div>
           <div
-            className= {           
-                `${profile.EditSection} mx-auto ${profile.Show}`
-            }   
+            className={
+              `${profile.EditSection} mx-auto ${profile.Show}`
+            }
           >
             <button className={profile.DefaultBtn + " d-block"}>
               Change Photo Profile
@@ -43,136 +122,83 @@ class Profile extends Component {
             </button>
           </div>
         </div>
+
+
         <Container>
           <div className="my-list d-flex mt-5">
-            <p
-              className={profile.ItemTitle + " " + profile.ItemTitleActive}
-              data-id={"MySection"}
-              
-            >
+            <p className={profile.ItemTitle + " " + profile.ItemTitleActive} data-id={"MySection"} onClick={this.myListActive}>
               My Recipe
             </p>
-            <p
-              className={profile.ItemTitle}
-              data-id={"SavedSection"}
-              
-            >
+            <p className={profile.ItemTitle} data-id={"SavedSection"} onClick={this.myListActive}>
               Saved Recipe
             </p>
-            <p
-              className={profile.ItemTitle}
-              data-id={"LikedSection"}
-              
-            >
+            <p className={profile.ItemTitle} data-id={"LikedSection"} onClick={this.myListActive}>
               Liked Recipe
             </p>
           </div>
         </Container>
         <hr />
         <Container>
-          <div
-            className={profile.ItemList + " " + profile.ItemListActive}
-            id="MySection"
-          >
+          <div className={profile.ItemList + " " + profile.ItemListActive} id="MySection">
             <div className={profile.CardWrapper}>
-              <div
-                className={profile.CardList}
-                style={{
-                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/16ad/8dbf/cfef9bb1fc6e0bef50d5c8ef7a6cdff6?Expires=1609718400&Signature=UsZkvjrgMz8JuKi4CYyo~vOSqmIp~8GkJ-D3kKqZXa48UtXQ1nAnxkBredr1KFnMSBISKGHG6Kgq-dkYCpE6X3GW~MlHwQ74XYi9rtmsuGw2HYyGl7ZoRzEnWZMNmcXYmCJ1Xpzt1XpWTpq4pG6~XaTpZsZAD2idgx3Oxdl~NhA80tYybTrn6o6FCGfYoIOh9DcRWGczi23CXynx8M5ehqXa~8OoBRhaHDS3v7bcp2ftxYrk7oFu9EltKmF7ZGQeUgjBiIVJQipCkcbOJvN5gqLjONm80XLClyau4l~-12cXbWb6lJk1q-SLdD1xod7lci8Uo9DipHxe~IWyeCGtDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')`,
-                }}
-              >
-                <h1>Bomb Chicken</h1>
-              </div>
-              <div
-                className={profile.CardList}
-                style={{
-                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/16ad/8dbf/cfef9bb1fc6e0bef50d5c8ef7a6cdff6?Expires=1609718400&Signature=UsZkvjrgMz8JuKi4CYyo~vOSqmIp~8GkJ-D3kKqZXa48UtXQ1nAnxkBredr1KFnMSBISKGHG6Kgq-dkYCpE6X3GW~MlHwQ74XYi9rtmsuGw2HYyGl7ZoRzEnWZMNmcXYmCJ1Xpzt1XpWTpq4pG6~XaTpZsZAD2idgx3Oxdl~NhA80tYybTrn6o6FCGfYoIOh9DcRWGczi23CXynx8M5ehqXa~8OoBRhaHDS3v7bcp2ftxYrk7oFu9EltKmF7ZGQeUgjBiIVJQipCkcbOJvN5gqLjONm80XLClyau4l~-12cXbWb6lJk1q-SLdD1xod7lci8Uo9DipHxe~IWyeCGtDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')`,
-                }}
-              >
-                <h1>Bomb Chicken</h1>
-              </div>
-              <div
-                className={profile.CardList}
-                style={{
-                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/16ad/8dbf/cfef9bb1fc6e0bef50d5c8ef7a6cdff6?Expires=1609718400&Signature=UsZkvjrgMz8JuKi4CYyo~vOSqmIp~8GkJ-D3kKqZXa48UtXQ1nAnxkBredr1KFnMSBISKGHG6Kgq-dkYCpE6X3GW~MlHwQ74XYi9rtmsuGw2HYyGl7ZoRzEnWZMNmcXYmCJ1Xpzt1XpWTpq4pG6~XaTpZsZAD2idgx3Oxdl~NhA80tYybTrn6o6FCGfYoIOh9DcRWGczi23CXynx8M5ehqXa~8OoBRhaHDS3v7bcp2ftxYrk7oFu9EltKmF7ZGQeUgjBiIVJQipCkcbOJvN5gqLjONm80XLClyau4l~-12cXbWb6lJk1q-SLdD1xod7lci8Uo9DipHxe~IWyeCGtDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')`,
-                }}
-              >
-                <h1>Bomb Chicken</h1>
-              </div>
-              <div
-                className={profile.CardList}
-                style={{
-                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/16ad/8dbf/cfef9bb1fc6e0bef50d5c8ef7a6cdff6?Expires=1609718400&Signature=UsZkvjrgMz8JuKi4CYyo~vOSqmIp~8GkJ-D3kKqZXa48UtXQ1nAnxkBredr1KFnMSBISKGHG6Kgq-dkYCpE6X3GW~MlHwQ74XYi9rtmsuGw2HYyGl7ZoRzEnWZMNmcXYmCJ1Xpzt1XpWTpq4pG6~XaTpZsZAD2idgx3Oxdl~NhA80tYybTrn6o6FCGfYoIOh9DcRWGczi23CXynx8M5ehqXa~8OoBRhaHDS3v7bcp2ftxYrk7oFu9EltKmF7ZGQeUgjBiIVJQipCkcbOJvN5gqLjONm80XLClyau4l~-12cXbWb6lJk1q-SLdD1xod7lci8Uo9DipHxe~IWyeCGtDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')`,
-                }}
-              >
-                <h1>Bomb Chicken</h1>
-              </div>
-              <div
-                className={profile.CardList}
-                style={{
-                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/16ad/8dbf/cfef9bb1fc6e0bef50d5c8ef7a6cdff6?Expires=1609718400&Signature=UsZkvjrgMz8JuKi4CYyo~vOSqmIp~8GkJ-D3kKqZXa48UtXQ1nAnxkBredr1KFnMSBISKGHG6Kgq-dkYCpE6X3GW~MlHwQ74XYi9rtmsuGw2HYyGl7ZoRzEnWZMNmcXYmCJ1Xpzt1XpWTpq4pG6~XaTpZsZAD2idgx3Oxdl~NhA80tYybTrn6o6FCGfYoIOh9DcRWGczi23CXynx8M5ehqXa~8OoBRhaHDS3v7bcp2ftxYrk7oFu9EltKmF7ZGQeUgjBiIVJQipCkcbOJvN5gqLjONm80XLClyau4l~-12cXbWb6lJk1q-SLdD1xod7lci8Uo9DipHxe~IWyeCGtDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')`,
-                }}
-              >
-                <h1>Bomb Chicken</h1>
-              </div>
+              {myrecipe && myrecipe.map(({ id_recipe, title, img }) => {
+                return (
+                  <>
+                    <Link to={{
+                      pathname: `/recipe/${id_recipe}`
+                    }}>
+                      <div href="/recipe" className={profile.CardList}>
+                        <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
+                        <h1>{title}</h1>
+                      </div>
+                    </Link>
+                  </>
+                )
+              })
+              }
             </div>
           </div>
+
           <div className={profile.ItemList} id="SavedSection">
             <div className={profile.CardWrapper}>
-              <div
-                className={profile.CardList}
-                style={{
-                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/16ad/8dbf/cfef9bb1fc6e0bef50d5c8ef7a6cdff6?Expires=1609718400&Signature=UsZkvjrgMz8JuKi4CYyo~vOSqmIp~8GkJ-D3kKqZXa48UtXQ1nAnxkBredr1KFnMSBISKGHG6Kgq-dkYCpE6X3GW~MlHwQ74XYi9rtmsuGw2HYyGl7ZoRzEnWZMNmcXYmCJ1Xpzt1XpWTpq4pG6~XaTpZsZAD2idgx3Oxdl~NhA80tYybTrn6o6FCGfYoIOh9DcRWGczi23CXynx8M5ehqXa~8OoBRhaHDS3v7bcp2ftxYrk7oFu9EltKmF7ZGQeUgjBiIVJQipCkcbOJvN5gqLjONm80XLClyau4l~-12cXbWb6lJk1q-SLdD1xod7lci8Uo9DipHxe~IWyeCGtDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')`,
-                }}
-              >
-                <h1>Bomb Chicken</h1>
-              </div>
-              <div
-                className={profile.CardList}
-                style={{
-                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/16ad/8dbf/cfef9bb1fc6e0bef50d5c8ef7a6cdff6?Expires=1609718400&Signature=UsZkvjrgMz8JuKi4CYyo~vOSqmIp~8GkJ-D3kKqZXa48UtXQ1nAnxkBredr1KFnMSBISKGHG6Kgq-dkYCpE6X3GW~MlHwQ74XYi9rtmsuGw2HYyGl7ZoRzEnWZMNmcXYmCJ1Xpzt1XpWTpq4pG6~XaTpZsZAD2idgx3Oxdl~NhA80tYybTrn6o6FCGfYoIOh9DcRWGczi23CXynx8M5ehqXa~8OoBRhaHDS3v7bcp2ftxYrk7oFu9EltKmF7ZGQeUgjBiIVJQipCkcbOJvN5gqLjONm80XLClyau4l~-12cXbWb6lJk1q-SLdD1xod7lci8Uo9DipHxe~IWyeCGtDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')`,
-                }}
-              >
-                <h1>Bomb Chicken</h1>
-              </div>
-              <div
-                className={profile.CardList}
-                style={{
-                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/16ad/8dbf/cfef9bb1fc6e0bef50d5c8ef7a6cdff6?Expires=1609718400&Signature=UsZkvjrgMz8JuKi4CYyo~vOSqmIp~8GkJ-D3kKqZXa48UtXQ1nAnxkBredr1KFnMSBISKGHG6Kgq-dkYCpE6X3GW~MlHwQ74XYi9rtmsuGw2HYyGl7ZoRzEnWZMNmcXYmCJ1Xpzt1XpWTpq4pG6~XaTpZsZAD2idgx3Oxdl~NhA80tYybTrn6o6FCGfYoIOh9DcRWGczi23CXynx8M5ehqXa~8OoBRhaHDS3v7bcp2ftxYrk7oFu9EltKmF7ZGQeUgjBiIVJQipCkcbOJvN5gqLjONm80XLClyau4l~-12cXbWb6lJk1q-SLdD1xod7lci8Uo9DipHxe~IWyeCGtDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')`,
-                }}
-              >
-                <h1>Bomb Chicken</h1>
-              </div>
+              {savedrecipe && savedrecipe.map(({ id_recipe, title, img }) => {
+                return (
+                  <>
+                    <Link to={{
+                      pathname: `/recipe/${id_recipe}`
+                    }}>
+                      <div href="/recipe" className={profile.CardList}>
+                        <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
+                        <h1>{title}</h1>
+                      </div>
+                    </Link>
+                  </>
+                );
+              })}
             </div>
           </div>
+
           <div className={profile.ItemList} id="LikedSection">
             <div className={profile.CardWrapper}>
-              <div
-                className={profile.CardList}
-                style={{
-                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/16ad/8dbf/cfef9bb1fc6e0bef50d5c8ef7a6cdff6?Expires=1609718400&Signature=UsZkvjrgMz8JuKi4CYyo~vOSqmIp~8GkJ-D3kKqZXa48UtXQ1nAnxkBredr1KFnMSBISKGHG6Kgq-dkYCpE6X3GW~MlHwQ74XYi9rtmsuGw2HYyGl7ZoRzEnWZMNmcXYmCJ1Xpzt1XpWTpq4pG6~XaTpZsZAD2idgx3Oxdl~NhA80tYybTrn6o6FCGfYoIOh9DcRWGczi23CXynx8M5ehqXa~8OoBRhaHDS3v7bcp2ftxYrk7oFu9EltKmF7ZGQeUgjBiIVJQipCkcbOJvN5gqLjONm80XLClyau4l~-12cXbWb6lJk1q-SLdD1xod7lci8Uo9DipHxe~IWyeCGtDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')`,
-                }}
-              >
-                <h1>Bomb Chicken</h1>
-              </div>
-              <div
-                className={profile.CardList}
-                style={{
-                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/16ad/8dbf/cfef9bb1fc6e0bef50d5c8ef7a6cdff6?Expires=1609718400&Signature=UsZkvjrgMz8JuKi4CYyo~vOSqmIp~8GkJ-D3kKqZXa48UtXQ1nAnxkBredr1KFnMSBISKGHG6Kgq-dkYCpE6X3GW~MlHwQ74XYi9rtmsuGw2HYyGl7ZoRzEnWZMNmcXYmCJ1Xpzt1XpWTpq4pG6~XaTpZsZAD2idgx3Oxdl~NhA80tYybTrn6o6FCGfYoIOh9DcRWGczi23CXynx8M5ehqXa~8OoBRhaHDS3v7bcp2ftxYrk7oFu9EltKmF7ZGQeUgjBiIVJQipCkcbOJvN5gqLjONm80XLClyau4l~-12cXbWb6lJk1q-SLdD1xod7lci8Uo9DipHxe~IWyeCGtDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')`,
-                }}
-              >
-                <h1>Bomb Chicken</h1>
-              </div>
-              <div
-                className={profile.CardList}
-                style={{
-                  backgroundImage: `url('https://s3-alpha-sig.figma.com/img/16ad/8dbf/cfef9bb1fc6e0bef50d5c8ef7a6cdff6?Expires=1609718400&Signature=UsZkvjrgMz8JuKi4CYyo~vOSqmIp~8GkJ-D3kKqZXa48UtXQ1nAnxkBredr1KFnMSBISKGHG6Kgq-dkYCpE6X3GW~MlHwQ74XYi9rtmsuGw2HYyGl7ZoRzEnWZMNmcXYmCJ1Xpzt1XpWTpq4pG6~XaTpZsZAD2idgx3Oxdl~NhA80tYybTrn6o6FCGfYoIOh9DcRWGczi23CXynx8M5ehqXa~8OoBRhaHDS3v7bcp2ftxYrk7oFu9EltKmF7ZGQeUgjBiIVJQipCkcbOJvN5gqLjONm80XLClyau4l~-12cXbWb6lJk1q-SLdD1xod7lci8Uo9DipHxe~IWyeCGtDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA')`,
-                }}
-              >
-                <h1>Bomb Chicken</h1>
-              </div>
+              {
+                likedrecipe && likedrecipe.map(({ id_recipe, title, img }) => {
+                  return (
+                    <>
+                      <Link to={{
+                        pathname: `/recipe/${id_recipe}`
+                      }}>
+                        <div href="/recipe" className={profile.CardList}>
+                          <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
+                          <h1>{title}</h1>
+                        </div>
+                      </Link>
+                    </>
+                  )
+                })
+              }
             </div>
           </div>
+
         </Container>
       </>
     );

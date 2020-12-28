@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import './style.css'
 import { Logo } from '../../assets'
 import { Form, Button } from "react-bootstrap";
-import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios'
+import { Redirect } from 'react-router-dom';
 import swal from 'sweetalert'
 import { setCodeReset, setCodeResetFalse } from '../../redux/actions/Auth'
 import { connect } from 'react-redux'
