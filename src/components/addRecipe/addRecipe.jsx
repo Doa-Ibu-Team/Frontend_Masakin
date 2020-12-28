@@ -60,7 +60,7 @@ class addRecipe extends Component {
         }
         console.log(formdata)
         e.preventDefault()
-        axios.post(baseUrl + '/recipe/b/add', formdata, config)
+        axios.post(baseUrl + '/recipe/add', formdata, config)
             .then(response => {
                 console.log(response)
                 this.setState({
