@@ -155,8 +155,8 @@ class Register extends Component {
             <div className="right-content">
             <div className="box-form-right-side">
                 <div style={{ textAlign: "center", marginTop: "170px" }}>
-                <h4 style={{ color: "#EFC81A" }}>Welcome </h4>
-                <p>Login into your Existing account</p>
+                <h4 style={{ color: "#EFC81A" }}>Let's Get Started! </h4>
+                <p>Create new account to access all features</p>
                 </div>
                 <Form className="my-form-right w-75">
                 <Form.Group controlId="formBasicEmail">

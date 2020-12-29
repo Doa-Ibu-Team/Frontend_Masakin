@@ -24,14 +24,14 @@ class CodeReset extends Component {
     }
     console.log(dataOtp)
     e.preventDefault()
+    this.setState({
+      isCodeReset: true
+    })
     axios.get(base_url + `/auth/otp/${dataOtp.email}/${dataOtp.otp}`)
       .then(({ data }) => {
         localStorage.removeItem('email')
         localStorage.setItem('token', data.token)
-        swal(data.message)
-        this.setState({
-          isCodeReset: true
-        })
+        swal(data.message)  
         dispatch(setCodeReset())
       }).catch((error) => {
         dispatch(setCodeResetFalse())
