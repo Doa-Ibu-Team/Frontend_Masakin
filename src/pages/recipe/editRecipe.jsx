@@ -1,22 +1,29 @@
-import React from 'react';
 import Navbar from '../../components/landingPage/Navbar';
-import AddRecipe from '../../components/Recipe/addRecipe'
+import EditRecipe from '../../components/Recipe/editRecipe'
 import Footer from '../../components/landingPage/Footer'
 import { Container } from "react-bootstrap"
-function addRecipe() {
-    return (
-        <>
+import React, { Component } from 'react';
+
+class editRecipe extends Component {
+    constructor(props){
+        super(props)
+    }
+    render() {
+        console.log(this.props)
+        return (
+            <>
                 <Navbar />
                 <Container style={{ marginTop: "20px" }}>
                     <div className="row">
                         <div className="col-10">
-                            <AddRecipe />
+                            <EditRecipe id={this.props.match.params.id}/>
                         </div>
                     </div>
                 </Container>
                 <Footer />
             </>
-    );
+        );
+    }
 }
 
-export default addRecipe
+export default editRecipe;

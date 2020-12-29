@@ -19,6 +19,13 @@
 	right: 0;
 }
 
+.DeleteButton {
+	cursor: pointer;
+	position: absolute;
+	bottom: 0;
+	right: 30px;
+}
+
 .Username {
 	font-size: 24px;
 }

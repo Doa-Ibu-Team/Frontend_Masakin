@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "../../components/navbar/navbar";
-import Search from "../../components/landingPage/search";
-import PopularForYou from "../../components/landingPage/popularForYou";
-import NewRecipe from "../../components/landingPage/newRecipe";
-import Popular from "../../components/landingPage/popularRecipe";
-import Footer from "../../components/landingPage/footer";
+import Navbar from "../../components/landingPage/Navbar";
+import Search from "../../components/landingPage/Search";
+import PopularForYou from "../../components/landingPage/PopularForyou";
+import NewRecipe from "../../components/landingPage/NewRecipe";
+import Popular from "../../components/landingPage/Popular";
+import Footer from "../../components/landingPage/Footer";
 
 export default function Home() {
   return (

@@ -1,0 +1,112 @@
+.session-tag{
+    border-left: #EFC81A 10px solid;
+    font-size: 36px;
+    padding: 10px 0 10px 10px;
+}
+.container-content{
+    padding-left: 10%;
+}
+.rectangle{
+    margin-top: 40px;
+    position: absolute;
+    left: 0;
+    width: 340px;
+    height: 400px;
+    background-color: #EFC81A;
+}
+.img-content-recipe{
+    position: absolute;
+    margin-left: 130px;
+    margin-top: 90px;
+    border-radius: 20px;
+    width: 400px;
+    height: 350px;
+}
+.title-recomen{
+    font-weight: 600;
+    margin-top: 100px;
+    font-size: 36px;
+}
+.line{
+    margin: 20px 0 25px 0;
+    width: 100px;
+    border-top: 1px solid #6F6A40;
+}
+.desc-content{
+    font-size: 20px;
+    font-weight: lighter;
+    margin-bottom: 40px;
+}
+.button-content{
+    background-color: #EFC81A;
+    padding: 9px 15px;
+}
+
+
+/* Medium  */
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+    .rectangle{
+        margin-top: 20px;
+        background-color: #fff;
+        position: relative;
+        margin-left: -55px !important;
+        width: auto;
+        height: auto;
+    }
+    .img-content-recipe{
+        position: relative;
+        margin-left: 0;
+        margin-top: 30px;
+        margin-bottom: -55px;
+        border-radius: 20px;
+        /* width: 400px;
+        height: 400px; */
+    }
+    .session-tag{
+        margin-top: 100px !important;
+        font-size: 30px;
+        margin-bottom: -20px;
+    }
+    .media-small{
+        margin-left: 10px;
+    }
+    .title-recomen{
+        margin-top: 100px;
+        font-size: 24px;
+    }
+    .desc-content{
+        font-size: 18px;
+        margin-bottom: 18px;
+    }
+}
+/* Small */
+@media (max-width: 767.98px) {
+    .session-tag{
+        margin-top: 20px !important;
+        font-size: 24px;
+    }
+    .rectangle{
+        margin-top: 20px;
+        background-color: #fff;
+        position: relative;
+        margin-left: -13px !important;
+        width: auto;
+        height: auto;
+    }
+    .img-content-recipe{
+        position: relative;
+        margin-left: 0;
+        margin-top: 30px;
+        margin-bottom: -55px;
+        border-radius: 20px;
+        /* width: 400px;
+        height: 400px; */
+    }
+    .title-recomen{
+        font-size: 24px;
+    }
+    .desc-content{
+        font-size: 18px;
+    }
+}
