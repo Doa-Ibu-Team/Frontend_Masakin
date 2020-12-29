@@ -27,7 +27,7 @@ class ForgotPass extends Component {
                 isForgot: true
             })
             localStorage.setItem("email", res.data.email);
-            // dispatch(setForgotPass());
+            dispatch(setForgotPass());
             swal("Sent Sukses!!! Silahkan cek email anda!");
 
         }).catch((error) => {
