@@ -13,7 +13,7 @@ export default class PopularForYou extends Component {
   };
 
   handlePopular = () => {
-    const token = undefined;
+    const token = localStorage.getItem("token");
 
     if (token === undefined) {
       axios
