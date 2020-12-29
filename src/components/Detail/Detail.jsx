@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { Container, Modal, Button, Form } from 'react-bootstrap'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import swal from 'sweetalert'
 import detail from './Detail.module.css'
 import LikedIcon from '../../assets/icons/like.png'
 import SavedIcon from '../../assets/icons/saved.png'
 import PhotoUser from '../../assets/photo-comment.png'
 import ReactPlayer from 'react-player'
+import EditBtn from "../../assets/icons/edit.png";
+import DeleteBtn from "../../assets/icons/delete.png";
 
 const baseUrl = process.env.REACT_APP_BASE_URL
 const config = {
@@ -240,7 +242,10 @@ class Detail extends Component {
 		}
 		let BtnAddVideo;
 		if (recipe.id_user == localStorage.getItem('user_ID')) {
-			BtnAddVideo = <><button className="btn btn-success" onClick={this.handleShowAdd}>Add New Video</button></>
+			BtnAddVideo =
+				<>
+					<button className="btn btn-outline-dark mb-3" onClick={this.handleShowAdd}> + | Add Video </button>
+				</>
 		}
 		return (
 			<>
@@ -271,21 +276,30 @@ class Detail extends Component {
 									if (recipe.id_user == localStorage.getItem('user_ID')) {
 										BtnEdit =
 											<>
-												<button id={videos.id} className="btn btn-primary" onClick={this.handleShow}>
-													Edit
-												</button>
+												<img
+													id={videos.id}
+													src={EditBtn}
+													className={detail.EditButton}
+													height="24px"
+													width="24px"
+													onClick={this.handleShow}
+												/>
 											</>
 										BtnDelete =
 											<>
-												<button id={videos.id} className="btn btn-danger" onClick={this.deleteVideo}>
-													Delete
-												</button>
+												<img
+													id={videos.id}
+													src={DeleteBtn}
+													className={detail.DeleteButton}
+													height="24px"
+													width="24px"
+													onClick={this.deleteVideo} />
 											</>
 									}
 									return (
 										<>
 											<h5>{videos.video_title}</h5>
-											<div className="row">
+											<div className="d-flex justify-content-start ml-2">
 												{BtnEdit}
 												{BtnDelete}
 											</div>
@@ -300,7 +314,6 @@ class Detail extends Component {
 
 													/>
 												</div>
-												{/* video src */}
 											</div>
 										</>
 									)

@@ -179,7 +179,6 @@ class Profile extends Component {
                             alt=""
                             height="24px"
                             width="24px"
-                           
                           />
                         </Link>
                         <img
