@@ -21,7 +21,7 @@ class ForgotPass extends Component {
         email: this.email
     }
     e.preventDefault()
-    axios.post(base_url + 'auth/forgot_password', data)
+    axios.post(base_url + '/auth/forgot_password', data)
         .then((res) => {
             this.setState({
                 isForgot: true
@@ -43,7 +43,7 @@ class ForgotPass extends Component {
         return (
     <>
       <div className="main">
-      {auth.isForgot && <Redirect to="/code-reset" />}
+      {auth.isForgot && <Redirect to="/reset-password" />}
         <div className="left-content">
           <div className="rectangle-overlay"></div>
           <div className="logo-login">

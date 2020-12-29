@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-
-import Navbar from '../../components/navbar/navbar'
+import Navbar from '../../components/landingPage/Navbar'
 import Detail from '../../components/Detail/Detail'
-import Footer from '../../components/landingPage/footer'
+import Footer from '../../components/landingPage/Footer'
 
 
 class DetailRecipe extends Component {
