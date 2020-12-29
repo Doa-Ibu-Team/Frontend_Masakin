@@ -5,13 +5,14 @@ import { Form, Button } from "react-bootstrap";
 import './style.css'
 import axios from 'axios'
 import swal from 'sweetalert'
-import { setLogin } from '../../redux/actions/Auth';
+import { setLogin, setLoginFalse } from '../../redux/actions/Auth';
 import {connect} from 'react-redux'
 
 const base_url = process.env.REACT_APP_BASE_URL
 console.log(base_url)
 
 class Login extends Component {
+
     state = {
         isLogin : false
     }
@@ -19,26 +20,44 @@ class Login extends Component {
         const {dispatch} = this.props;
         const data = {
             email: this.email,
-            password: this.password
+            password: this.password,
+            checkbox: this.checkbox
         }
         e.preventDefault()
-        axios.post(base_url + '/auth/login', data)
-            .then((res) => {
-                this.setState({
-                    isLogin: true
-                })
-                localStorage.setItem("token", res.data.tokenId);
-                res.headers["x-access-token"] = res.data.tokenId;
-                localStorage.setItem("user_ID", res.data.id_user);
-                localStorage.setItem("name", res.data.name);
-
-                dispatch(setLogin());
-                swal("Login Berhasil");
-
-            }).catch((error) => {
-                console.log(error)
-                swal("Password Salah!")
+        
+        axios.post(base_url + 'auth/login', data)
+        .then((res) => {
+            
+            this.setState({
+                isLogin: true,
             })
+            localStorage.setItem("token", res.data.tokenId);
+            res.headers["x-access-token"] = res.data.tokenId;
+            localStorage.setItem("user_ID", res.data.id_user);
+            localStorage.setItem("name", res.data.name);
+
+            dispatch(setLogin());
+            swal("Login Berhasil");
+
+        }).catch((err) => {
+            
+            if(err.response.data.status === 403) {
+                dispatch(setLoginFalse())
+                swal("Password Salah!")
+                console.log(err.response.data.status)
+            }
+            if(err.response.data.status === 401) {
+                dispatch(setLoginFalse())
+                swal("Please activate your account first!")
+                console.log(err.response.data.status)
+            }
+            if(err.response.status === 404) {
+                dispatch(setLoginFalse())
+                swal("Email not found!")
+                console.log(err.response.data.status)
+            }
+            
+        })
     }
     render() {
         console.log(localStorage)
@@ -70,7 +89,7 @@ class Login extends Component {
                 <p>Login into your Existing account</p>
                 </div>
     
-                <Form className="my-form">
+                <Form className="my-form" >
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -79,24 +98,30 @@ class Login extends Component {
                     name="email"
                     onChange={(e) => (this.email = e.target.value)}
                     placeholder="examplexxx@gmail.com"
+                    required
                     />
                 </Form.Group>
     
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
-                    className="shadow"
-                    type="password"
-                    name="password"
-                    onChange={(e) => (this.password = e.target.value)}
-                    placeholder="Password"
+                        className="shadow form-control"
+                        type="password"
+                        name="password"
+                        onChange={(e) => (this.password = e.target.value)}
+                        placeholder="Password"
+                        required
+                        
                     />
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
                     <Form.Check
                     type="checkbox"
                     label=" I agree terms and condition"
+                    name="checkBox"
                     style={{ fontSize: "13px" }}
+                    onChange={(e) => (this.checkbox = e.target.value)}
+                    required
                     />
                 </Form.Group>
                 <Button
@@ -142,7 +167,7 @@ class Login extends Component {
                 <h4 style={{ color: "#EFC81A" }}>Welcome </h4>
                 <p>Login into your Existing account</p>
                 </div>
-                <Form className="my-form-right w-75">
+                <Form className="my-form-right w-75" >
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -152,25 +177,30 @@ class Login extends Component {
                     onChange={(e) => (this.email = e.target.value)}
                     placeholder="examplexxx@gmail.com"
                     required
+                    
                     />
                 </Form.Group>
     
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
-                    className="shadow"
-                    type="password"
-                    name="password"
-                    onChange={(e) => (this.password = e.target.value)}
-                    placeholder="Password"
-                    required
+                        className="shadow form-control"
+                        type="password"
+                        name="password"
+                        onChange={(e) => (this.password = e.target.value)}
+                        placeholder="Password"
+                        required
+                        
                     />
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
                     <Form.Check
                     type="checkbox"
+                    name="checkBox"
                     label=" I agree terms and condition"
                     style={{ fontSize: "13px" }}
+                    required
+                    onChange={(e) => (this.checkbox = e.target.value)}
                     />
                 </Form.Group>
                 <Button

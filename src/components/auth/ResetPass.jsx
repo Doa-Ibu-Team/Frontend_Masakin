@@ -3,12 +3,60 @@ import { Link, Redirect } from "react-router-dom";
 import { Logo } from "../../assets";
 import { Form, Button } from "react-bootstrap";
 import './style.css'
+import swal from 'sweetalert';
+import axios from 'axios';
+import { setResetPass } from '../../redux/actions/Auth'
+import { connect } from 'react-redux'
 
-export default class ResetPass extends Component {
+const base_url = process.env.REACT_APP_BASE_URL
+
+class ResetPass extends Component {
+    state = {
+        isReset: false
+    }
+    handleSubmit = (e) => {
+        const {dispatch} = this.props;
+        const data = {
+            new_password: this.new_password,
+            password_conf: this.password_conf
+
+        };
+        e.preventDefault()
+        this.setState({
+            isReset: true,
+        })
+        if (data.new_password !== data.password_conf) {
+            swal("Passwords don't match");
+        }
+        axios
+            .patch(base_url + 'auth/reset_password/' + localStorage.getItem("token") , data)
+            .then((res) => {
+                console.log(res)
+                // localStorage.setItem("activatedHere", res.data.activateHere);
+                // localStorage.setItem("email", res.data.email);
+                dispatch(setResetPass());
+                localStorage.removeItem("token")
+                swal("Selamat Reset Password Berhasil!")
+            })
+            .catch((err) => {
+                if(err.response.data.status === 409)
+                {
+                    swal("Email Telah digunakan")
+                }
+                console.log(err)
+            });
+
+        console.log(data);
+        console.log(data.email)
+    };
+    
     render() {
+        console.log(localStorage)
+        const { auth } = this.props;
         return (
-            <>
+        <>
         <div className="main">
+        {auth.isReset && <Redirect to="/login" />}
             <div className="left-content">
             <div className="rectangle-overlay"></div>
             <div className="logo-login">
@@ -26,8 +74,9 @@ export default class ResetPass extends Component {
                     <Form.Control
                     className="shadow"
                     type="password"
-                    name="password"
+                    name="new_password"
                     placeholder=""
+                    onChange={(e) => (this.new_password = e.target.value)}
                     />
                 </Form.Group>
     
@@ -38,6 +87,7 @@ export default class ResetPass extends Component {
                     type="password"
                     name="password_conf"
                     placeholder="Password"
+                    onChange={(e) => (this.password_conf = e.target.value)}
                     />
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
@@ -47,7 +97,6 @@ export default class ResetPass extends Component {
                     style={{ fontSize: "13px" }}
                     />
                 </Form.Group>
-                    <Link to="/login">
                         <Button
                             type="submit"
                             style={{
@@ -60,7 +109,6 @@ export default class ResetPass extends Component {
                         >
                             Reset Password
                         </Button>
-                    </Link>
                 </Form>
             </div>
             </div>
@@ -72,9 +120,10 @@ export default class ResetPass extends Component {
                     <Form.Control
                     className="shadow"
                     type="password"
-                    name="password"
+                    name="new_password"
                     placeholder=""
                     required
+                    onChange={(e) => (this.new_password = e.target.value)}
                     />
                 </Form.Group>
     
@@ -86,6 +135,7 @@ export default class ResetPass extends Component {
                     name="password_conf"
                     placeholder=""
                     required
+                    onChange={(e) => (this.password_conf = e.target.value)}
                     />
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
@@ -95,7 +145,6 @@ export default class ResetPass extends Component {
                     style={{ fontSize: "13px" }}
                     />
                 </Form.Group>
-                <Link to="/login">
                         <Button
                             type="submit"
                             style={{
@@ -108,7 +157,6 @@ export default class ResetPass extends Component {
                         >
                             Reset Password
                         </Button>
-                    </Link>
                 </Form>
             </div>
             </div>
@@ -117,3 +165,10 @@ export default class ResetPass extends Component {
         )
     }
 }
+const mapStateToProps = ({ auth, newState }) => {
+    return {
+        auth,
+        newState
+    };
+  };
+  export default connect(mapStateToProps)(ResetPass)

@@ -32,6 +32,26 @@ const authReducer = (prevState = initialState, action) => {
                 ...prevState,
                 isForgot: false
             };
+        case "CODE_RESET_TRUE":
+            return {
+                ...prevState,
+                isCodeReset: true
+            };
+        case "CODE_RESET_FALSE":
+            return {
+                ...prevState,
+                isCodeReset: false
+            };
+        case "RESET_PASS_TRUE":
+            return {
+                ...prevState,
+                isReset: true
+            };
+        case "RESET_PASS_FALSE":
+            return {
+                ...prevState,
+                isReset: false
+            };
         default:
             return {
                 ...prevState
