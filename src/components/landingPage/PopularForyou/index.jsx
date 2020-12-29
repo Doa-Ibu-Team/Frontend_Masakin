@@ -1,10 +1,34 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 
 import "./style.css";
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 export default class PopularForYou extends Component {
+
+  // state = {
+  //   popularRecipes: [],
+  // };
+
+  // getPopularRecipes = () => {
+  //   axios
+  //     .get(baseUrl + `/recipe/views`)
+  //     .then((res) => {
+  //       const popularRecipes = res.data.data;
+  //       // console.log("kontol "+{popularRecipes});
+  //       this.setState({ popularRecipes });
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
+  // componentDidMount = () => {
+  //   this.getPopularRecipes();
+  // };
+
   render() {
     return (
       <>
