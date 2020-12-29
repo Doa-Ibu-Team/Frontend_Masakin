@@ -27,10 +27,10 @@ class ForgotPass extends Component {
                 isForgot: true
             })
             localStorage.setItem("email", res.data.email);
-            localStorage.setItem("linkReset", res.data.message);
-            localStorage.setItem("tokenForgot", res.data.token)
+            localStorage.setItem("otp", res.data.otp);
+            localStorage.setItem("token", res.data.token);
             dispatch(setForgotPass());
-            swal("Sent Berhasil");
+            swal("Sent Sukses!!! Silahkan cek email anda!");
 
         }).catch((error) => {
             console.log(error)
