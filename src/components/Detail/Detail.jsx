@@ -349,7 +349,7 @@ class Detail extends Component {
 					</div>
 				</Container>
 
-				{/* Modal Change Photo */}
+				{/* Modal Edit Video */}
 				<Modal show={this.state.showModal} onHide={this.handleClose}>
 					<Modal.Header closeButton>
 						<Modal.Title>Edit Video</Modal.Title>
@@ -369,7 +369,7 @@ class Detail extends Component {
 					</Modal.Footer>
 				</Modal>
 
-				{/* Modal Change Photo */}
+				{/* Modal Add Video */}
 				<Modal show={this.state.showModalAdd} onHide={this.handleCloseAdd}>
 					<Modal.Header closeButton>
 						<Modal.Title>Add New Video</Modal.Title>
