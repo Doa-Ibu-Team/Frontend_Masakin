@@ -24,7 +24,7 @@ class Login extends Component {
             checkbox: this.checkbox
         }
         e.preventDefault()
-        console.log(data)
+        
         axios.post(base_url + '/auth/login', data)
         .then((res) => {
             
