@@ -25,14 +25,14 @@ class Login extends Component {
         }
         e.preventDefault()
         
-        axios.post(base_url + 'auth/login', data)
+        axios.post(base_url + '/auth/login', data)
         .then((res) => {
             
             this.setState({
                 isLogin: true,
             })
-            localStorage.setItem("token", res.data.tokenId);
-            res.headers["x-access-token"] = res.data.tokenId;
+            localStorage.setItem("token", res.data.token);
+            res.headers["x-access-token"] = res.data.token;
             localStorage.setItem("user_ID", res.data.id_user);
             localStorage.setItem("name", res.data.name);
 
