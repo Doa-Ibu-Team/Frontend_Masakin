@@ -31,7 +31,7 @@ class Register extends Component {
             swal("Passwords don't match");
         }
         axios
-            .post(base_url + 'auth/signup', data)
+            .post(base_url + '/auth/signup', data)
             .then((res) => {
                 console.log(res)
                 localStorage.setItem("activatedHere", res.data.activateHere);

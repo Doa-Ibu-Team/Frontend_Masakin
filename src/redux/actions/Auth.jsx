@@ -39,3 +39,27 @@ export const setForgotPassFalse = (data) => {
         type: "FORGOT_PASS_FALSE"
     }
 }
+
+export const setCodeReset = (data) => {
+    return {
+        type: "CODE_RESET_TRUE"
+    }
+}
+
+export const setCodeResetFalse = (data) => {
+    return {
+        type: "CODE_RESET_FALSE"
+    }
+}
+
+export const setResetPass = (data) => {
+    return {
+        type: "RESET_PASS_TRUE"
+    }
+}
+
+export const setResetPassFalse = (data) => {
+    return {
+        type: "RESET_PASS_FALSE"
+    }
+}

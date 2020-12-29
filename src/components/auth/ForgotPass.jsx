@@ -21,15 +21,16 @@ class ForgotPass extends Component {
         email: this.email
     }
     e.preventDefault()
-    axios.post(base_url + 'auth/forgot_password', data)
+    axios.post(base_url + '/auth/forgot_password', data)
         .then((res) => {
             this.setState({
                 isForgot: true
             })
             localStorage.setItem("email", res.data.email);
-            localStorage.setItem("linkReset", res.data.message);
+            localStorage.setItem("otp", res.data.otp);
+            localStorage.setItem("token", res.data.token);
             dispatch(setForgotPass());
-            swal("Sent Berhasil");
+            swal("Sent Sukses!!! Silahkan cek email anda!");
 
         }).catch((error) => {
             console.log(error)
@@ -42,7 +43,7 @@ class ForgotPass extends Component {
         return (
     <>
       <div className="main">
-      {auth.isForgot && <Redirect to="/code-reset" />}
+      {auth.isForgot && <Redirect to="/reset-password" />}
         <div className="left-content">
           <div className="rectangle-overlay"></div>
           <div className="logo-login">

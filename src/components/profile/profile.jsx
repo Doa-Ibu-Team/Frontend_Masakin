@@ -2,15 +2,23 @@ import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import axios from "axios";
 import { Link } from 'react-router-dom'
-
+import swal from 'sweetalert'
 import profile from "./Profile.module.css";
 import ImageProfile from "../../assets/images/profile/profile.png";
 import EditProfileBtn from "../../assets/icons/edit-image.png";
+import EditBtn from "../../assets/icons/edit.png";
+import DeleteBtn from "../../assets/icons/delete.png";
 
 const baseUrl = process.env.REACT_APP_BASE_URL
 const config = {
   headers: {
     'Content-Type': 'multipart/form-data',
+    "x-access-token": "Bearer " + localStorage.getItem("token")
+  },
+}
+
+const configDelete = {
+  headers: {
     "x-access-token": "Bearer " + localStorage.getItem("token")
   },
 }
@@ -64,7 +72,7 @@ class Profile extends Component {
       })
   }
 
-  savedRecipe = async () => {
+  savedRecipe = () => {
     axios.get(baseUrl + '/user/getbookmark', config)
       .then((res) => {
         console.log(res.data)
@@ -75,6 +83,17 @@ class Profile extends Component {
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  deleteRecipe = (e) => {
+    // console.log(e.target.id)
+    axios.delete(baseUrl + '/recipe/delete/' + e.target.id, config)
+    .then((res) => {
+      swal('Data berhasil dihapus')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   componentDidMount = () => {
@@ -144,14 +163,35 @@ class Profile extends Component {
               {myrecipe && myrecipe.map(({ id_recipe, title, img }) => {
                 return (
                   <>
-                    <Link to={{
-                      pathname: `/recipe/${id_recipe}`
-                    }}>
-                      <div href="/recipe" className={profile.CardList}>
+
+                    <div className={profile.CardList}>
+                      <Link to={{
+                        pathname: `/recipe/${id_recipe}`
+                      }}>
                         <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
                         <h1>{title}</h1>
+                      </Link>
+                      <div className='row'>
+                        <Link to={{ pathname: `/edit/${id_recipe}` }}>
+                          <img
+                            src={EditBtn}
+                            className={profile.EditButton}
+                            alt=""
+                            height="24px"
+                            width="24px"
+                          />
+                        </Link>
+                        <img
+                          src={DeleteBtn}
+                          className={profile.DeleteButton}
+                          alt=""
+                          id={id_recipe}
+                          height="24px"
+                          width="24px"
+                          onClick={this.deleteRecipe}
+                        />
                       </div>
-                    </Link>
+                    </div>
                   </>
                 )
               })

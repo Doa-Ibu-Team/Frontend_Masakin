@@ -31,7 +31,7 @@ export default class Navbars extends Component {
                     <Container>
                         <Nav className="mr-auto">
                             <Nav.Link href="/" className="font-nav"><FontAwesomeIcon icon={faHome} className="mr-2 text-dark icon-lg" /> Home</Nav.Link>
-                            <Nav.Link href="#features" className="font-nav"><FontAwesomeIcon icon={faPlus} className="mr-2 text-dark icon-lg" /> Add Recipe</Nav.Link>
+                            <Nav.Link href="/add" className="font-nav"><FontAwesomeIcon icon={faPlus} className="mr-2 text-dark icon-lg" /> Add Recipe</Nav.Link>
                             <Nav.Link href="/profile" className="font-nav"><FontAwesomeIcon icon={faUserCircle} className="mr-2 text-dark icon-lg" /> Profile</Nav.Link>
                         </Nav>
                         <Form inline className="hide-log">
