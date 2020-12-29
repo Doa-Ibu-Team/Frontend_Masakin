@@ -18,18 +18,16 @@ class ResetPass extends Component {
         const {dispatch} = this.props;
         const data = {
             new_password: this.new_password,
-            password_conf: this.password_conf
-
         };
         e.preventDefault()
         this.setState({
             isReset: true,
         })
-        if (data.new_password !== data.password_conf) {
+        if (data.new_password !== this.password_conf) {
             swal("Passwords don't match");
         }
         axios
-            .patch(base_url + 'auth/reset_password/' + localStorage.getItem("token") , data)
+            .patch(base_url + '/auth/reset_password/' + localStorage.getItem("token") ,data )
             .then((res) => {
                 console.log(res)
                 // localStorage.setItem("activatedHere", res.data.activateHere);
@@ -39,15 +37,12 @@ class ResetPass extends Component {
                 swal("Selamat Reset Password Berhasil!")
             })
             .catch((err) => {
-                if(err.response.data.status === 409)
-                {
-                    swal("Email Telah digunakan")
-                }
                 console.log(err)
+                swal('UNDEFINED ERROR')
             });
 
-        console.log(data);
-        console.log(data.email)
+        // console.log(data);
+        // console.log(data.email)
     };
     
     render() {

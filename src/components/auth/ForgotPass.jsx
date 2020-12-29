@@ -27,9 +27,7 @@ class ForgotPass extends Component {
                 isForgot: true
             })
             localStorage.setItem("email", res.data.email);
-            localStorage.setItem("otp", res.data.otp);
-            localStorage.setItem("token", res.data.token);
-            dispatch(setForgotPass());
+            // dispatch(setForgotPass());
             swal("Sent Sukses!!! Silahkan cek email anda!");
 
         }).catch((error) => {
@@ -43,7 +41,7 @@ class ForgotPass extends Component {
         return (
     <>
       <div className="main">
-      {auth.isForgot && <Redirect to="/reset-password" />}
+      {auth.isForgot && <Redirect to="/code-reset" />}
         <div className="left-content">
           <div className="rectangle-overlay"></div>
           <div className="logo-login">
