@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../../components/navbar/navbar';
+import Navbar from '../../components/landingPage/Navbar';
 import SearchItems from '../../components/searchItems';
 import { Container } from "react-bootstrap";
 import axios from 'axios'

@@ -24,15 +24,16 @@ class Login extends Component {
             checkbox: this.checkbox
         }
         e.preventDefault()
-        
-        axios.post(base_url + 'auth/login', data)
+        console.log(data)
+        axios.post(base_url + '/auth/login', data)
         .then((res) => {
             
             this.setState({
                 isLogin: true,
             })
-            localStorage.setItem("token", res.data.tokenId);
-            res.headers["x-access-token"] = res.data.tokenId;
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem('email', res.data.email)
+            res.headers["x-access-token"] = res.data.token;
             localStorage.setItem("user_ID", res.data.id_user);
             localStorage.setItem("name", res.data.name);
 
@@ -40,7 +41,8 @@ class Login extends Component {
             swal("Login Berhasil");
 
         }).catch((err) => {
-            
+            // console.log(err)
+            // swal('username atau pasword salah')
             if(err.response.data.status === 403) {
                 dispatch(setLoginFalse())
                 swal("Password Salah!")

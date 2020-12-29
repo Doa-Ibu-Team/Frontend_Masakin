@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Navbar from '../../components/navbar/navbar'
+import Navbar from '../../components/landingPage/Navbar'
 import DetailProfile from '../../components/profile/profile'
-import Footer from '../../components/landingPage/footer'
+import Footer from '../../components/landingPage/Footer'
 
 class Profile extends Component {
 	render () {

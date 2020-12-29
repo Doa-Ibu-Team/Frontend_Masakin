@@ -20,6 +20,16 @@
 	right: 15px;
 }
 
+.EditButton {
+	cursor: pointer;
+	
+}
+
+.DeleteButton {
+	cursor: pointer;
+	margin-left: 10px;
+}
+
 .SavedButton, .LikedButton, .UnlikedButton, .UnsavedButton {
 	height: 42px;
 	width: 42px;
@@ -93,6 +103,13 @@
 
 .TextVideo {
 	margin-top: 50px;
+}
+
+.TextDesc,
+.TextVideo,
+.TextComment {
+  font-family: "Airbnb Cereal App Medium";
+  color: #3f3a3a;
 }
 
 .VideoItem {

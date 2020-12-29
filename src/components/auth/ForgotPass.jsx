@@ -21,15 +21,13 @@ class ForgotPass extends Component {
         email: this.email
     }
     e.preventDefault()
-    axios.post(base_url + 'auth/forgot_password', data)
+    axios.post(base_url + '/auth/forgot_password', data)
         .then((res) => {
             this.setState({
                 isForgot: true
             })
             localStorage.setItem("email", res.data.email);
-            localStorage.setItem("otp", res.data.otp);
-            localStorage.setItem("token", res.data.token);
-            dispatch(setForgotPass());
+            // dispatch(setForgotPass());
             swal("Sent Sukses!!! Silahkan cek email anda!");
 
         }).catch((error) => {
