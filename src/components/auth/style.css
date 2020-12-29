@@ -57,13 +57,22 @@
 } */
 
 /* Dhiyo Style CSS */
+@font-face {
+  font-family: Airbnb;
+  src: url("../../assets/fonts/airbnb-cereal-app/AirbnbCerealMedium.ttf");
+}
 
+@font-face {
+  font-family: Inter;
+  src: url("../../assets/fonts/inter/Inter-Medium.ttf");
+}
 .main {
   width: 100%;
   height: 100vh;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
+  font-family: Inter;
 }
 .left-content {
   flex-grow: 1;
