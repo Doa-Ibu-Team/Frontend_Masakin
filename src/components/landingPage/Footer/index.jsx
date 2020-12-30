@@ -6,7 +6,7 @@ export default class Footer extends Component {
   render() {
     return (
       <div>
-        <footer className="mt-4 footer">
+        <footer className="mt-5 footer">
           <h3 className="title-footer text-center">Eat, Cook, Repeat</h3>
           <p className="desc-footer text-center">
             Share your best recipe by uploading here !
