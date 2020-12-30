@@ -5,9 +5,6 @@ import Footer from '../../components/landingPage/Footer'
 
 
 class DetailRecipe extends Component {
-	constructor(){
-		super()
-	}
 	render () {
 		console.log(this.props)
 		return (

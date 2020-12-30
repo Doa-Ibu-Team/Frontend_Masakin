@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { Container, Modal, Button, Form } from 'react-bootstrap'
+import { Container, Modal, Button } from 'react-bootstrap'
 import axios from 'axios'
 // import { Link } from 'react-router-dom'
 import swal from 'sweetalert'
 import detail from './Detail.module.css'
 import LikedIcon from '../../assets/icons/like.png'
 import SavedIcon from '../../assets/icons/saved.png'
-import PhotoUser from '../../assets/photo-comment.png'
 import ReactPlayer from 'react-player'
 import EditBtn from "../../assets/icons/edit.png";
 import DeleteBtn from "../../assets/icons/delete.png";
@@ -26,9 +25,6 @@ const configUpdate = {
 const xpostdata = ''
 
 class Detail extends Component {
-	constructor() {
-		super()
-	}
 	state = {
 		recipe: [],
 		comment: [],
@@ -234,25 +230,25 @@ class Detail extends Component {
 			bookmarkBtn =
 				<>
 					<div className={detail.UnsavedButton} onClick={this.bookmarkItem}>
-						<img src={SavedIcon} alt="" />
+						<img src={SavedIcon} alt="img" />
 					</div> </>
 		}
 		let likeBtn =
 			<>
 				<div className={detail.LikedButton} onClick={this.unlikeItem}>
-					<img src={LikedIcon} alt="" />
+					<img src={LikedIcon} alt="img" />
 				</div>
 			</>
 		if (!this.state.liked) {
 			likeBtn =
 				<>
 					<div className={detail.UnlikedButton} onClick={this.likeItem}>
-						<img src={LikedIcon} alt="" />
+						<img src={LikedIcon} alt="img" />
 					</div>
 				</>
 		}
 		let BtnAddVideo;
-		if (recipe.id_user == localStorage.getItem('user_ID')) {
+		if (recipe.id_user === localStorage.getItem('user_ID')) {
 			BtnAddVideo =
 				<>
 					<button className="btn btn-outline-dark mb-3" onClick={this.handleShowAdd}> + | Add Video </button>
@@ -265,7 +261,7 @@ class Detail extends Component {
 						<h1 className={'mx-auto ' + detail.Title}>{recipe.title}</h1>
 					</div>
 					{/* {isCommented && window.location.reload()   } */}
-					<div className={'mx-auto ' + detail.ImageSize} style={{ backgroundImage: `url(${'http://127.0.0.1:8000' + recipe.img})` }} >
+					<div className={'mx-auto ' + detail.ImageSize} style={{ backgroundImage: `url(${'baseUrl' + recipe.img})` }} >
 						<div className={detail.ButtonList}>
 							{bookmarkBtn}
 							{likeBtn}
@@ -284,7 +280,7 @@ class Detail extends Component {
 							{
 								recipe.videos && recipe.videos.map((videos) => {
 									let BtnEdit, BtnDelete;
-									if (recipe.id_user == localStorage.getItem('user_ID')) {
+									if (recipe.id_user === localStorage.getItem('user_ID')) {
 										BtnEdit =
 											<>
 												<img
@@ -293,6 +289,7 @@ class Detail extends Component {
 													className={detail.EditButton}
 													height="24px"
 													width="24px"
+													alt="img"
 													onClick={this.handleShow}
 												/>
 											</>
@@ -304,6 +301,7 @@ class Detail extends Component {
 													className={detail.DeleteButton}
 													height="24px"
 													width="24px"
+													alt="img"
 													onClick={this.deleteVideo} />
 											</>
 									}
@@ -319,7 +317,7 @@ class Detail extends Component {
 													<ReactPlayer
 														config={{ controls: true }}
 														className='react-player'
-														url={`http://127.0.0.1:8000/` + videos.video_file}
+														url={baseUrl/ + videos.video_file}
 														width='100%'
 														height='100%'
 
@@ -343,7 +341,7 @@ class Detail extends Component {
 										<>
 											<div className={'d-flex ' + detail.CommentItem}>
 												<div className={detail.ImageItem} > 
-													<img src={baseUrl + comm.img} style={{maxWidth:"48px",maxHeight:"48px",borderRadius: "50%"}}/>
+													<img alt="img" src={baseUrl + comm.img} style={{maxWidth:"48px",maxHeight:"48px",borderRadius: "50%"}}/>
 												</div>
 
 												<div className={detail.CommentUser}>

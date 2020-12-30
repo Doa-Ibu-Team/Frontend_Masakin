@@ -8,8 +8,6 @@ import { setCodeReset, setCodeResetFalse } from '../../redux/actions/Auth'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-const qs = require('querystring')
-
 const base_url = process.env.REACT_APP_BASE_URL
 
 class CodeReset extends Component {

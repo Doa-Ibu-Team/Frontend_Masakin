@@ -5,7 +5,7 @@ import { faUserCircle, faPlus, faHome } from "@fortawesome/free-solid-svg-icons"
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios'
 import swal from 'sweetalert'
-import { setLogout, setLogoutFalse } from '../../../redux/actions/Auth'
+import { setLogout } from '../../../redux/actions/Auth'
 import { connect } from "react-redux";
 
 import "./style.css";
