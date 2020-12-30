@@ -13,7 +13,7 @@ class editRecipe extends Component {
         return (
             <>
                 <Navbar />
-                <Container style={{ marginTop: "20px" }}>
+                <Container style={{ marginTop: "0px" }}>
                     <div className="row">
                         <div className="col-10">
                             <EditRecipe id={this.props.match.params.id}/>

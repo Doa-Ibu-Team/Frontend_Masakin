@@ -28,19 +28,21 @@ export default class NewRecipe extends Component {
   };
 
   render() {
+    const { newRecipes} = this.state
+
     return (
       <>
         <Container fluid>
           <Container>
             <h3 className="session-tag mt-5">New Recipe</h3>
           </Container>
-          {this.state.newRecipes.map((newRecipe, id) => {
+          {newRecipes && newRecipes.map(({ id_recipe, title, img}) => {
             return (
               <Row>
                 <Col md={6} className="container-content">
                   <div className="rectangle">
                     <img
-                      src="https://res.cloudinary.com/zada/image/upload/v1608472385/img-title_hsr2uf.png"
+                      src={`${baseUrl}/` + img}
                       className="img-content-recipe img-fluid rounded"
                       alt=""
                     />
@@ -49,7 +51,7 @@ export default class NewRecipe extends Component {
                 <Col md={6}>
                   <div className="media-small pr-5">
                     <h3 className="title-recomen">
-                      {newRecipe.title}
+                      {title}
                     </h3>
                     <div className="line"></div>
                     <p className="desc-content">
@@ -57,7 +59,7 @@ export default class NewRecipe extends Component {
                       ramen in a hurry? That’s right!
                     </p>
                     <Link
-                      to=""
+                      to= {{ pathname: `recipe/${id_recipe}`}}
                       className="button-content rounded-lg text-white mt-5"
                     >
                       Learn More

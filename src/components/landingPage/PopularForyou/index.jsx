@@ -15,7 +15,7 @@ export default class PopularForYou extends Component {
   handlePopular = () => {
     const token = localStorage.getItem("token");
 
-    if (token === undefined) {
+    if (!token) {
       axios
       .get(baseUrl + `/recipe/popularforyou`, {
         // headers: {
@@ -64,6 +64,7 @@ export default class PopularForYou extends Component {
   };
 
   render() {
+    const { popularRecipes} = this.state
     return (
       <>
         <Container fluid>
@@ -72,13 +73,13 @@ export default class PopularForYou extends Component {
               Popular For You !
             </h3>
           </Container>
-          {this.state.popularRecipes.map((popularRecipe, id) => {
+          {popularRecipes && popularRecipes.map(({ id_recipe, title, img}) => {
             return (
               <Row>
                 <Col md={6} className="container-content">
                   <div className="border-img">
                     <img
-                      src="https://res.cloudinary.com/zada/image/upload/v1608472385/img-title_hsr2uf.png"
+                      src={`${baseUrl}/` + img}
                       className="img-content img-fluid rounded"
                       alt=""
                     />
@@ -87,7 +88,7 @@ export default class PopularForYou extends Component {
                 <Col md={6}>
                   <div className="pr-5 media-small-pop">
                     <h3 className="title-recomen">
-                    {popularRecipe.title}
+                    {title}
                     </h3>
                     <div className="line"></div>
                     <p className="desc-content">
@@ -95,7 +96,7 @@ export default class PopularForYou extends Component {
                       ramen in a hurry? That’s right!
                     </p>
                     <Link
-                      to=""
+                      to= {{ pathname: `recipe/${id_recipe}`}}
                       className="button-content rounded-lg text-white mt-5"
                     >
                       Learn More

@@ -249,7 +249,7 @@ class Detail extends Component {
 		}
 		return (
 			<>
-				<Container>
+				<Container className="mb-4">
 					<div className="text-center">
 						<h1 className={'mx-auto ' + detail.Title}>{recipe.title}</h1>
 					</div>

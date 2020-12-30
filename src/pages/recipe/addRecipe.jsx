@@ -7,7 +7,7 @@ function addRecipe() {
     return (
         <>
                 <Navbar />
-                <Container style={{ marginTop: "20px" }}>
+                <Container style={{ marginTop: "0px" }}>
                     <div className="row">
                         <div className="col-10">
                             <AddRecipe />
