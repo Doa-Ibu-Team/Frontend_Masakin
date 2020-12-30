@@ -5,9 +5,7 @@ import { Container } from "react-bootstrap"
 import React, { Component } from 'react';
 
 class editRecipe extends Component {
-    constructor(props){
-        super(props)
-    }
+    
     render() {
         console.log(this.props)
         return (

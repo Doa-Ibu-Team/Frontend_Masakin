@@ -85,17 +85,17 @@ class addRecipe extends Component {
 
     render() {
         console.log(this.state)
-        const { user_id, title, ingredients, img } = this.state
+        const { title, ingredients, img } = this.state
         let ImgThumb;
         if (this.state.file != null) {
             ImgThumb =
                 <>
-                    <img src={this.state.file} style={{ maxHeight: "240px", maxWidth: "240px" }}/>
+                    <img alt="img" src={this.state.file} style={{ maxHeight: "240px", maxWidth: "240px" }}/>
                 </>
         } else {
             ImgThumb =
             <>
-                <img src={baseUrl + this.state.img_thumbnail} style={{ maxHeight: "240px", maxWidth: "240px" }} />
+                <img alt="img" src={baseUrl + this.state.img_thumbnail} style={{ maxHeight: "240px", maxWidth: "240px" }} />
             </>
         }
         // console.log(ImgThumb)

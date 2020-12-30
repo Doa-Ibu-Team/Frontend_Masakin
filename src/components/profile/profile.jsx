@@ -4,11 +4,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import profile from "./Profile.module.css";
-import ImageProfile from "../../assets/images/profile/profile.png";
 import EditProfileBtn from "../../assets/icons/edit-image.png";
 import EditBtn from "../../assets/icons/edit.png";
 import DeleteBtn from "../../assets/icons/delete.png";
-import UserProfile from "../../assets/icons/user.png";
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 const config = {
@@ -86,12 +84,13 @@ class Profile extends Component {
     axios
       .patch(baseUrl + "/user/change_profile/", formdata, configDelete)
       .then(({ data }) => {
-        swal('sukses mengganti foto')
-          this.setState({
-            showModal: false,
-          })
-      }).catch((error) => {
-        console.log(error)
+        swal("sukses mengganti foto");
+        this.setState({
+          showModal: false,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       })
       .catch((error) => {
         console.log(error);
@@ -106,7 +105,7 @@ class Profile extends Component {
   };
 
   changePass = (e) => {
-    if (this.state.password != this.state.password_conf) {
+    if (this.state.password !== this.state.password_conf) {
       swal("Password harus sama!");
     } else {
       const data = {
@@ -118,20 +117,19 @@ class Profile extends Component {
       axios
         .patch(baseUrl + `/user/change_password`, data, configDelete)
         .then(({ data }) => {
-          console.log(data)
-          swal('Password berhasil diubah')
+          console.log(data);
+          swal("Password berhasil diubah");
           this.setState({
             showModalPw: false,
-          })
+          });
         })
         .catch((error) => {
-          if(error.response.data.status === 403) {
-            swal("Password Salah!")
+          if (error.response.data.status === 403) {
+            swal("Password Salah!");
           } else {
-            console.log(error)
+            console.log(error);
           }
-
-        })
+        });
     }
   };
 
@@ -258,7 +256,7 @@ class Profile extends Component {
           </div>
         </Container>
 
-        <Container className = 'mb-5'>
+        <Container className="mb-5">
           <div className="my-list d-flex mt-5">
             <p
               className={profile.ItemTitle + " " + profile.ItemTitleActive}
@@ -301,7 +299,8 @@ class Profile extends Component {
                           }}
                         >
                           <img
-                            src={"http://127.0.0.1:8000/" + img}
+                            alt="img"
+                            src={baseUrl/ + img}
                             style={{ width: "270px", height: "180px" }}
                           />
                           <h1>{title}</h1>
@@ -346,7 +345,8 @@ class Profile extends Component {
                       >
                         <div href="/recipe" className={profile.CardList}>
                           <img
-                            src={"http://127.0.0.1:8000/" + img}
+                            alt="img"
+                            src={baseUrl/ + img}
                             style={{ width: "270px", height: "180px" }}
                           />
                           <h1>{title}</h1>
@@ -371,7 +371,8 @@ class Profile extends Component {
                       >
                         <div href="/recipe" className={profile.CardList}>
                           <img
-                            src={"http://127.0.0.1:8000/" + img}
+                            alt="img"
+                            src={baseUrl/ + img}
                             style={{ width: "270px", height: "180px" }}
                           />
                           <h1>{title}</h1>
@@ -391,7 +392,7 @@ class Profile extends Component {
           </Modal.Header>
           <Modal.Body>
             <input type="file" name="img" onChange={this.handleFile} />
-            <img src={this.state.img} />
+            <img alt="img" src={this.state.img} />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>

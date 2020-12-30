@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Jumbotron, Button, Form } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
 import swal from 'sweetalert'
 import squareImg from "../../assets/icons/imageupload.png";
 import css from "./recipe.module.css";
@@ -82,7 +81,7 @@ class addRecipe extends Component {
 
     render() {
         console.log(this.state)
-        const { user_id, title, ingredients, img, videos } = this.state
+        const { title, ingredients, img } = this.state
         return (
             <div className='container'>
                 {/* {this.state.dataInserted && <Redirect to="/profile" />} */}
@@ -95,7 +94,7 @@ class addRecipe extends Component {
                                     <img src={squareImg} alt="" />
                                     <div className={css.UploadBtn}>Add Photo</div>
                                     <input type="file" name='img' onChange={this.handleFile} autoComplete='off' placeholder="" />
-                                    <img src={this.state.file} style={{ maxHeight: "240px", maxWidth: "240px" }} />
+                                    <img alt="img" src={this.state.file} style={{ maxHeight: "240px", maxWidth: "240px" }} />
                                 </div>
                             </Jumbotron>
                             <Form.Group controlId="formBasicText" style={{ margin: '2rem auto 2rem auto' }}>
