@@ -90,7 +90,7 @@ class addRecipe extends Component {
         if (this.state.file != null) {
             ImgThumb =
                 <>
-                    <img src={this.state.file} />
+                    <img src={this.state.file} style={{ maxHeight: "240px", maxWidth: "240px" }}/>
                 </>
         } else {
             ImgThumb =

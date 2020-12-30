@@ -24,6 +24,7 @@ export default class PopularForYou extends Component {
       })
       .then((res) => {
         const popularRecipes = res.data.data;
+        console.log(popularRecipes)
         this.setState({ popularRecipes });
         // console.log("memek "+{popularRecipes});
       })

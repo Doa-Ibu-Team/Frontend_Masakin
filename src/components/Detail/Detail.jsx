@@ -36,7 +36,7 @@ class Detail extends Component {
 		saved: false,
 		videoToEdit: 0,
 		videos: [],
-		isCommented: false
+		isCommented: false,
 	}
 
 	//Modal Photo
@@ -84,6 +84,12 @@ class Detail extends Component {
 		axios.post(baseUrl + '/recipe/video/' + this.props.id, formdata, configUpdate)
 			.then(({ data }) => {
 				console.log(data)
+				swal("berhasil menambahkan video")
+				this.setState({
+					showModalAdd: false,
+					videos: []
+				});
+
 			}).catch((error) => {
 				console.log(error)
 			})
@@ -98,6 +104,11 @@ class Detail extends Component {
 		axios.put(baseUrl + '/recipe/video/' + this.state.videoToEdit, formdata, configUpdate)
 			.then(({ data }) => {
 				swal('sukses menambahkan video baru')
+				this.setState({
+					showModal: false,
+					videoToEdit: 0,
+					videos: []
+				});
 			}).catch((error) => {
 				console.log(error)
 			})
@@ -331,7 +342,9 @@ class Detail extends Component {
 									return (
 										<>
 											<div className={'d-flex ' + detail.CommentItem}>
-												<div className={detail.ImageItem} style={{ backgroundImage: `url(${PhotoUser})` }}></div>
+												<div className={detail.ImageItem} > 
+													<img src={baseUrl + comm.img} style={{maxWidth:"48px",maxHeight:"48px",borderRadius: "50%"}}/>
+												</div>
 
 												<div className={detail.CommentUser}>
 													<span className={detail.CommentUserName}>{comm.name}</span>

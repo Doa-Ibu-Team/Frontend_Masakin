@@ -87,6 +87,9 @@ class Profile extends Component {
     axios.patch(baseUrl + '/user/change_profile/', formdata, configDelete)
       .then(({ data }) => {
         swal('sukses mengganti foto')
+          this.setState({
+            showModal: false,
+          })
       }).catch((error) => {
         console.log(error)
       })
@@ -113,9 +116,17 @@ class Profile extends Component {
         .then(({ data }) => {
           console.log(data)
           swal('Password berhasil diubah')
+          this.setState({
+            showModalPw: false,
+          })
         })
         .catch((error) => {
-          console.log(error)
+          if(error.response.data.status === 403) {
+            swal("Password Salah!")
+          } else {
+            console.log(error)
+          }
+
         })
     }
   }
@@ -355,7 +366,7 @@ class Profile extends Component {
             <Form.Control
               type="password"
               name="old_password"
-              placeholder="Password"
+              placeholder="Old Password"
               value={old_password}
               onChange={this.pwHandler}
             />
@@ -363,7 +374,7 @@ class Profile extends Component {
             <Form.Control
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="New Password"
               value={password}
               onChange={this.pwHandler}
             />
@@ -371,7 +382,7 @@ class Profile extends Component {
             <Form.Control
               type="password"
               name="password_conf"
-              placeholder="Password"
+              placeholder="Confirmation Password"
               value={password_conf}
               onChange={this.pwHandler}
             />
