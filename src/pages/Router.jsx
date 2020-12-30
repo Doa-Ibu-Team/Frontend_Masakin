@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Home from "../pages/home/Home";
 import Login from "./auth/Login"
@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import store from "../redux/store";
 import CodeReset from "./auth/CodeReset";
 import ResetPass from "./auth/ResetPass";
+import PrivateRoute from "../components/PrivateRoute";
 
 const Router = () => {
   return (
@@ -25,11 +26,11 @@ const Router = () => {
         <Route path="/forgot-password" component={ForgotPass} />
         <Route path="/code-reset" component={CodeReset} />
         <Route path="/reset-password" component={ResetPass} />
-        <Route path="/add" component={AddRecipe} />
+        <PrivateRoute path="/add" component={AddRecipe} />
         <Route exact path="/edit/:id" component={EditRecipe} />
-        <Route exact path='/recipe/:id' component={DetailRecipe} />
+        <PrivateRoute exact path='/recipe/:id' component={DetailRecipe} />
         <Route path="/search" component={SearchPage} />
-        <Route path="/profile" component={Profile} />
+        <PrivateRoute path="/profile" component={Profile} />
       </BrowserRouter>
     </Provider>
   );

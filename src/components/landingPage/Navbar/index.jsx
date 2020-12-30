@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { Navbar, Nav, Form, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUserCircle,
-  faPlus,
-  faHome,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import swal from "sweetalert";
+import { faUserCircle, faPlus, faHome } from "@fortawesome/free-solid-svg-icons";
+import { Link, Redirect } from "react-router-dom";
+import axios from 'axios'
+import swal from 'sweetalert'
+import { setLogout, setLogoutFalse } from '../../../redux/actions/Auth'
+import { connect } from "react-redux";
 
 import "./style.css";
 
@@ -20,10 +18,12 @@ const config = {
   },
 };
 
-export default class Navbars extends Component {
+class Navbars extends Component {
+
   state = {
     className: "bg-nav nav-poss",
     justRandom: null,
+    isLogout: false
   };
 
   listenScrollEvent = (e) => {
@@ -34,24 +34,27 @@ export default class Navbars extends Component {
     }
   };
   LogoutBtn = () => {
-    console.log("aaaaa");
-    axios
-      .delete(base_url + "/auth/logout/", config)
-      .then(({ data }) => {
-        console.log(data);
-        swal("Logout");
-        localStorage.removeItem("user_ID");
-        localStorage.removeItem("email");
-        localStorage.removeItem("name");
-        localStorage.removeItem("token");
-        this.setState({
-          justRandom: Math.floor(),
-        });
+    this.setState({
+      isLogout: true
+    })
+    console.log('aaaaa')
+    const {dispatch} = this.props
+    axios.delete(base_url+'/auth/logout/', config)
+    .then(({data}) => {
+      console.log(data)
+      swal('Logout')
+      localStorage.removeItem('user_ID')
+      localStorage.removeItem('email')
+      localStorage.removeItem('name')
+      localStorage.removeItem('token') 
+      dispatch(setLogout())
+      this.setState({
+        justRandom: Math.floor()
       })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
 
   componentDidMount() {
     window.addEventListener("scroll", this.listenScrollEvent);
@@ -60,15 +63,10 @@ export default class Navbars extends Component {
   render() {
     let btnLogin;
     let btnLogout;
-    if (localStorage.getItem("token")) {
-      btnLogin = (
-        <>
-          {" "}
-          <Link to="/profile" className="text-white">
-            {localStorage.getItem("name")}
-          </Link>
-        </>
-      );
+    const {auth} = this.props
+    if (localStorage.getItem('token')) {
+      btnLogin = <> <Link to="/profile" className="text-white" >{localStorage.getItem('name')}</Link>
+      </>
     } else {
       btnLogin = (
         <>
@@ -79,15 +77,8 @@ export default class Navbars extends Component {
         </>
       );
     }
-    if (localStorage.getItem("token")) {
-      btnLogout = (
-        <>
-          {" "}
-          <button className="btn btn-outline-light" onClick={this.LogoutBtn}>
-            Logout
-          </button>{" "}
-        </>
-      );
+    if (localStorage.getItem('token')) {
+      btnLogout = <> {auth.isLogout && <Redirect to="/" />} <button className="btn btn-outline-light" onClick={this.LogoutBtn}>Logout</button> </>
     }
     return (
       <header>
@@ -136,3 +127,10 @@ export default class Navbars extends Component {
     );
   }
 }
+const mapStateToProps = ({ auth, newState }) => {
+  return {
+      auth,
+      newState
+  };
+};
+export default connect(mapStateToProps)(Navbars)

@@ -63,3 +63,14 @@ export const setResetPassFalse = (data) => {
         type: "RESET_PASS_FALSE"
     }
 }
+export const setLogout = (data) => {
+    return {
+        type: "LOGOUT_TRUE"
+    }
+}
+
+export const setLogoutFalse = (data) => {
+    return {
+        type: "LOGOUT_FALSE"
+    }
+}

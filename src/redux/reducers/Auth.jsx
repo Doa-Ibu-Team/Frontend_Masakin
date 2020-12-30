@@ -52,6 +52,16 @@ const authReducer = (prevState = initialState, action) => {
                 ...prevState,
                 isReset: false
             };
+        case "LOGOUT_TRUE":
+            return {
+                ...prevState,
+                isLogout: true
+            };
+        case "LOGOUT_FALSE":
+            return {
+                ...prevState,
+                isLogout: false
+            };
         default:
             return {
                 ...prevState
