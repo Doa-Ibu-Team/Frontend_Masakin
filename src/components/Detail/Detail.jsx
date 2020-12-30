@@ -248,7 +248,7 @@ class Detail extends Component {
 				</>
 		}
 		let BtnAddVideo;
-		if (recipe.id_user === localStorage.getItem('user_ID')) {
+		if (recipe.id_user == localStorage.getItem('user_ID')) {
 			BtnAddVideo =
 				<>
 					<button className="btn btn-outline-dark mb-3" onClick={this.handleShowAdd}> + | Add Video </button>
@@ -280,7 +280,7 @@ class Detail extends Component {
 							{
 								recipe.videos && recipe.videos.map((videos) => {
 									let BtnEdit, BtnDelete;
-									if (recipe.id_user === localStorage.getItem('user_ID')) {
+									if (recipe.id_user == localStorage.getItem('user_ID')) {
 										BtnEdit =
 											<>
 												<img
