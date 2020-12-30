@@ -45,7 +45,7 @@ export default class PopularRecipe extends Component {
                     <li key={id}>
                       <img
                         className="feed-food"
-                        src={baseUrl/ + img}
+                        src={baseUrl + img}
                         alt=""
                       />
                       <div className="text-block">

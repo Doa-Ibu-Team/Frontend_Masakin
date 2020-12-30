@@ -261,7 +261,7 @@ class Detail extends Component {
 						<h1 className={'mx-auto ' + detail.Title}>{recipe.title}</h1>
 					</div>
 					{/* {isCommented && window.location.reload()   } */}
-					<div className={'mx-auto ' + detail.ImageSize} style={{ backgroundImage: `url(${'baseUrl' + recipe.img})` }} >
+					<div className={'mx-auto ' + detail.ImageSize} style={{ backgroundImage: `url(${baseUrl + recipe.img})` }} >
 						<div className={detail.ButtonList}>
 							{bookmarkBtn}
 							{likeBtn}
@@ -317,7 +317,7 @@ class Detail extends Component {
 													<ReactPlayer
 														config={{ controls: true }}
 														className='react-player'
-														url={baseUrl/ + videos.video_file}
+														url={baseUrl + videos.video_file}
 														width='100%'
 														height='100%'
 
