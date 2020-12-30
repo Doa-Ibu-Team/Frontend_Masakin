@@ -42,7 +42,7 @@ export default class NewRecipe extends Component {
                 <Col md={6} className="container-content">
                   <div className="rectangle">
                     <img
-                      src={`${baseUrl}/` + img}
+                      src={baseUrl + img}
                       className="img-content-recipe img-fluid rounded"
                       alt=""
                     />

@@ -80,7 +80,7 @@ export default class PopularForYou extends Component {
                 <Col md={6} className="container-content">
                   <div className="border-img">
                     <img
-                      src={`${baseUrl}/` + img}
+                      src={baseUrl + img}
                       className="img-content img-fluid rounded"
                       alt=""
                     />
