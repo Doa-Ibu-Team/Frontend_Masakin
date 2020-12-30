@@ -2,6 +2,9 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
+// const tokenLogin = localStorage.getItem("token");
+// console.log(tokenLogin);
+
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   return (
     // Show the component only when the user is logged in
@@ -9,11 +12,11 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        localStorage.getItem("token") ? 
-        <Component {...props} /> : <Redirect to={{
-          pathname: "/login",
-          state: {from: props.location}
-        }} />
+        localStorage.getItem("token") ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/login" />
+        )
       }
     />
   );
