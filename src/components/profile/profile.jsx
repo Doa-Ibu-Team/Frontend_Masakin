@@ -300,7 +300,7 @@ class Profile extends Component {
                         >
                           <img
                             alt="img"
-                            src={baseUrl/ + img}
+                            src={baseUrl + img}
                             style={{ width: "270px", height: "180px" }}
                           />
                           <h1>{title}</h1>
@@ -346,7 +346,7 @@ class Profile extends Component {
                         <div href="/recipe" className={profile.CardList}>
                           <img
                             alt="img"
-                            src={baseUrl/ + img}
+                            src={baseUrl + img}
                             style={{ width: "270px", height: "180px" }}
                           />
                           <h1>{title}</h1>
@@ -372,7 +372,7 @@ class Profile extends Component {
                         <div href="/recipe" className={profile.CardList}>
                           <img
                             alt="img"
-                            src={baseUrl/ + img}
+                            src={baseUrl + img}
                             style={{ width: "270px", height: "180px" }}
                           />
                           <h1>{title}</h1>
