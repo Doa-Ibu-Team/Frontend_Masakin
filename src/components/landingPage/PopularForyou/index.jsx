@@ -15,7 +15,7 @@ export default class PopularForYou extends Component {
   handlePopular = () => {
     const token = localStorage.getItem("token");
 
-    if (token === undefined) {
+    if (!localStorage.getItem('token')) {
       axios
       .get(baseUrl + `/recipe/popularforyou`, {
         // headers: {
