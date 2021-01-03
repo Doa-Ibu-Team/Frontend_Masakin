@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import "./style.css";
 
@@ -27,30 +28,35 @@ export default class PopularRecipe extends Component {
   };
 
   render() {
+    const { popularRecipes } = this.state;
+
     return (
       <>
-        <Container fluid>
+        <Container>
           <Container>
             <h3 className="session-tag gap-content">Popular Recipe</h3>
           </Container>
 
           <ul className="galery">
-            {this.state.popularRecipes.map((popularRecipe, id) => {
-              return (
-                <li key={id}>
-                  <img
-                    className="feed-food"
-                    src="https://res.cloudinary.com/zada/image/upload/v1608472385/img-title_hsr2uf.png"
-                    alt=""
-                  />
-                  <div className="text-block">
-                    <h4>
-                      {popularRecipe.title} <br></br>
-                    </h4>
-                  </div>
-                </li>
-              );
-            })}
+            {popularRecipes &&
+              popularRecipes.map(({ id_recipe, title, img, id }) => {
+                return (
+                  <Link to={{ pathname: `recipe/${id_recipe}` }}>
+                    <li key={id}>
+                      <img
+                        className="feed-food"
+                        src={baseUrl + img}
+                        alt=""
+                      />
+                      <div className="text-block">
+                        <h4>
+                          {title} <br></br>
+                        </h4>
+                      </div>
+                    </li>
+                  </Link>
+                );
+              })}
           </ul>
         </Container>
       </>

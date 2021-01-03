@@ -42,11 +42,10 @@ export default class SearchPage extends Component {
         return (
             <>
                 <Navbar />
-                <div className="container">
                     <Container>
                         <h3 className="session-tag gap-content">Results</h3>
                     </Container>
-                    <div style={{float:'left', width:'80%', height:'80%'}}>
+                    <div >
                         {
                             items && items.map(({ id_recipe, title, img }) => {
                                 return (
@@ -55,7 +54,6 @@ export default class SearchPage extends Component {
                             })
                         }
                     </div>
-                </div>
             </>
         )
     }

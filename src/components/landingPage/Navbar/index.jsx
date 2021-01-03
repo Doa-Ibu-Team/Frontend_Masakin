@@ -5,18 +5,18 @@ import { faUserCircle, faPlus, faHome } from "@fortawesome/free-solid-svg-icons"
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios'
 import swal from 'sweetalert'
-import { setLogout, setLogoutFalse } from '../../../redux/actions/Auth'
+import { setLogout } from '../../../redux/actions/Auth'
 import { connect } from "react-redux";
 
 import "./style.css";
 
-const base_url = process.env.REACT_APP_BASE_URL
+const base_url = process.env.REACT_APP_BASE_URL;
 
 const config = {
   headers: {
-    "x-access-token": "Bearer " + localStorage.getItem("token")
+    "x-access-token": "Bearer " + localStorage.getItem("token"),
   },
-}
+};
 
 class Navbars extends Component {
 
@@ -26,7 +26,7 @@ class Navbars extends Component {
     isLogout: false
   };
 
-  listenScrollEvent = e => {
+  listenScrollEvent = (e) => {
     if (window.scrollY > 50) {
       this.setState({ className: "bg-nav nav-poss" });
     } else {
@@ -68,7 +68,14 @@ class Navbars extends Component {
       btnLogin = <> <Link to="/profile" className="text-white" >{localStorage.getItem('name')}</Link>
       </>
     } else {
-      btnLogin = <> <Link to="/login" className="text-white" >Login</Link> </>
+      btnLogin = (
+        <>
+          {" "}
+          <Link to="/login" className="text-white">
+            Login
+          </Link>{" "}
+        </>
+      );
     }
     if (localStorage.getItem('token')) {
       btnLogout = <> {auth.isLogout && <Redirect to="/" />} <button className="btn btn-outline-light" onClick={this.LogoutBtn}>Logout</button> </>
@@ -78,14 +85,40 @@ class Navbars extends Component {
         <Navbar className={this.state.className}>
           <Container>
             <Nav className="mr-auto">
-              <Nav.Link href="/" className="font-nav"><FontAwesomeIcon icon={faHome} className="mr-2 text-dark icon-lg" /> Home</Nav.Link>
-              <Nav.Link href="/add" className="font-nav"><FontAwesomeIcon icon={faPlus} className="mr-2 text-dark icon-lg" /> Add Recipe</Nav.Link>
-              <Nav.Link href="/profile" className="font-nav"><FontAwesomeIcon icon={faUserCircle} className="mr-2 text-dark icon-lg" /> Profile</Nav.Link>
-
+              <Link to="/">
+                <div className="nav-link font-nav">
+                  <FontAwesomeIcon
+                    icon={faHome}
+                    className="mr-2 text-dark icon-lg"
+                  />{" "}
+                  Home
+                </div>
+              </Link>
+              <Link to="/add">
+                <div className="nav-link font-nav">
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    className="mr-2 text-dark icon-lg"
+                  />{" "}
+                  Add Recipe
+                </div>
+              </Link>
+              <Link to="/profile">
+                <div className="nav-link font-nav">
+                  <FontAwesomeIcon
+                    icon={faUserCircle}
+                    className="mr-2 text-dark icon-lg"
+                  />{" "}
+                  Profile
+                </div>
+              </Link>
             </Nav>
             <Form inline className="hide-log">
-              <FontAwesomeIcon icon={faUserCircle} className="mr-2 text-white" />
-                {btnLogin}
+              <FontAwesomeIcon
+                icon={faUserCircle}
+                className="mr-2 text-white"
+              />
+              {btnLogin}
             </Form>
             {btnLogout}
           </Container>

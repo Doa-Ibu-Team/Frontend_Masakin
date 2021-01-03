@@ -1,40 +1,37 @@
 import React, { Component } from "react";
 import { Container, Modal, Button, Form } from "react-bootstrap";
 import axios from "axios";
-import { Link } from 'react-router-dom'
-import swal from 'sweetalert'
+import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import profile from "./Profile.module.css";
-import ImageProfile from "../../assets/images/profile/profile.png";
 import EditProfileBtn from "../../assets/icons/edit-image.png";
 import EditBtn from "../../assets/icons/edit.png";
 import DeleteBtn from "../../assets/icons/delete.png";
-import UserProfile from "../../assets/icons/user.png";
 
-
-const baseUrl = process.env.REACT_APP_BASE_URL
+const baseUrl = process.env.REACT_APP_BASE_URL;
 const config = {
   headers: {
-    'Content-Type': 'multipart/form-data',
-    "x-access-token": "Bearer " + localStorage.getItem("token")
+    "Content-Type": "multipart/form-data",
+    "x-access-token": "Bearer " + localStorage.getItem("token"),
   },
-}
+};
 
 const configDelete = {
   headers: {
-    "x-access-token": "Bearer " + localStorage.getItem("token")
+    "x-access-token": "Bearer " + localStorage.getItem("token"),
   },
-}
+};
 
 class Profile extends Component {
   state = {
     myrecipe: [],
     likedrecipe: [],
     savedrecipe: [],
-    password: '',
-    password_conf: '',
-    old_password: '',
-    profile_photo: '',
-  }
+    password: "",
+    password_conf: "",
+    old_password: "",
+    profile_photo: "",
+  };
 
   myListActive = (e) => {
     const ListId = e.target.dataset.id;
@@ -56,7 +53,7 @@ class Profile extends Component {
   handleClose = () =>
     this.setState({
       showModal: false,
-      img: []
+      img: [],
     });
   handleShow = () =>
     this.setState({
@@ -75,22 +72,30 @@ class Profile extends Component {
   handleFile = (e) => {
     this.setState({
       file: URL.createObjectURL(e.target.files[0]),
-      img: e.target.files
-    })
-  }
+      img: e.target.files,
+    });
+  };
 
   updatePhoto = () => {
-    let formdata = new FormData()
+    let formdata = new FormData();
     for (let i = 0; i < this.state.img.length; i++) {
       formdata.append("img", this.state.img[i]);
     }
-    axios.patch(baseUrl + '/user/change_profile/', formdata, configDelete)
+    axios
+      .patch(baseUrl + "/user/change_profile/", formdata, configDelete)
       .then(({ data }) => {
-        swal('sukses mengganti foto')
-      }).catch((error) => {
-        console.log(error)
+        swal("sukses mengganti foto");
+        this.setState({
+          showModal: false,
+        });
       })
-  }
+      .catch((error) => {
+        console.log(error);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   pwHandler = (e) => {
     const value = e.target.value;
@@ -100,226 +105,282 @@ class Profile extends Component {
   };
 
   changePass = (e) => {
-    if (this.state.password != this.state.password_conf) {
-      swal('Password harus sama!')
+    if (this.state.password !== this.state.password_conf) {
+      swal("Password harus sama!");
     } else {
       const data = {
-        email: localStorage.getItem('email'),
+        email: localStorage.getItem("email"),
         oldPassword: this.state.old_password,
         newPassword: this.state.password,
       };
-      console.log(data)
-      axios.patch(baseUrl + `/user/change_password`, data, configDelete)
+      console.log(data);
+      axios
+        .patch(baseUrl + `/user/change_password`, data, configDelete)
         .then(({ data }) => {
-          console.log(data)
-          swal('Password berhasil diubah')
+          console.log(data);
+          swal("Password berhasil diubah");
+          this.setState({
+            showModalPw: false,
+          });
         })
         .catch((error) => {
-          console.log(error)
-        })
+          if (error.response.data.status === 403) {
+            swal("Password Salah!");
+          } else {
+            console.log(error);
+          }
+        });
     }
-  }
+  };
 
   getMyRecipe = () => {
-    axios.get(baseUrl + `/user/myRecipe/`, config)
+    axios
+      .get(baseUrl + `/user/myRecipe/`, config)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         this.setState({
-          myrecipe: res.data.data
-        })
+          myrecipe: res.data.data,
+        });
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   likedRecipe = () => {
-    axios.get(baseUrl + '/user/getLike', config)
+    axios
+      .get(baseUrl + "/user/getLike", config)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         this.setState({
-          likedrecipe: res.data.data
-        })
+          likedrecipe: res.data.data,
+        });
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   savedRecipe = () => {
-    axios.get(baseUrl + '/user/getbookmark', config)
+    axios
+      .get(baseUrl + "/user/getbookmark", config)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         this.setState({
-          savedrecipe: res.data.data
-        })
+          savedrecipe: res.data.data,
+        });
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   deleteRecipe = (e) => {
     // console.log(e.target.id)
-    axios.delete(baseUrl + '/recipe/delete/' + e.target.id, config)
+    axios
+      .delete(baseUrl + "/recipe/delete/" + e.target.id, config)
       .then((res) => {
-        swal('Data berhasil dihapus')
+        swal("Data berhasil dihapus");
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   componentDidMount = () => {
-    this.getMyRecipe()
-    this.savedRecipe()
-    this.likedRecipe()
-    axios.get(baseUrl + `/user/profilePhoto`, configDelete)
+    this.getMyRecipe();
+    this.savedRecipe();
+    this.likedRecipe();
+    axios
+      .get(baseUrl + `/user/profilePhoto`, configDelete)
       .then(({ data }) => {
-        console.log(data)
+        console.log(data);
         this.setState({
-          profile_photo: data[0].img
-        })
+          profile_photo: data[0].img,
+        });
       })
       .catch((error) => {
-        console.log(error)
-      })
-
-  }
+        console.log(error);
+      });
+  };
 
   render() {
     // console.log(this.state.profile);
-    const { myrecipe, savedrecipe, likedrecipe, old_password, password, password_conf } = this.state
-    console.log(this.state)
+    const {
+      myrecipe,
+      savedrecipe,
+      likedrecipe,
+      old_password,
+      password,
+      password_conf,
+    } = this.state;
+    console.log(this.state);
     return (
       <>
-        <div className={profile.Section}>
-          <div
-            className={profile.Image + " mx-auto"}
-            style={{ backgroundImage: `url(${baseUrl + this.state.profile_photo})` }}
-          >
-            <img
-              src={EditProfileBtn}
-              className={profile.EditButton}
-              alt=""
-              height="24px"
-              width="24px"
-            //   onClick={this.updateEditSection}
-            />
-          </div>
-          <div className={"mx-auto text-center "}>
-            <p className={profile.Username + " mt-2"}>
-              {localStorage.getItem('name')}
-            </p>
-          </div>
-          <div
-            className={
-              `${profile.EditSection} mx-auto ${profile.Show}`
-            }
-          >
-            <button className={profile.DefaultBtn + " d-block"} onClick={this.handleShow}>
-              Change Photo Profile
-            </button>
-            <button className={profile.DefaultBtn + " d-block"} onClick={this.handleShowPw}>
-              Change Password
-            </button>
-          </div>
-        </div>
-
-
         <Container>
+          <div className={profile.Section}>
+            <div
+              className={profile.Image + " mx-auto"}
+              style={{
+                backgroundImage: `url(${baseUrl + this.state.profile_photo})`,
+              }}
+            >
+              <img
+                src={EditProfileBtn}
+                className={profile.EditButton}
+                alt=""
+                height="24px"
+                width="24px"
+                //   onClick={this.updateEditSection}
+              />
+            </div>
+            <div className={"mx-auto text-center "}>
+              <p className={profile.Username + " mt-2"}>
+                {localStorage.getItem("name")}
+              </p>
+            </div>
+            <div className={`${profile.EditSection} mx-auto ${profile.Show}`}>
+              <button
+                className={profile.DefaultBtn + " d-block"}
+                onClick={this.handleShow}
+              >
+                Change Photo Profile
+              </button>
+              <button
+                className={profile.DefaultBtn + " d-block"}
+                onClick={this.handleShowPw}
+              >
+                Change Password
+              </button>
+            </div>
+          </div>
+        </Container>
+
+        <Container className="mb-5">
           <div className="my-list d-flex mt-5">
-            <p className={profile.ItemTitle + " " + profile.ItemTitleActive} data-id={"MySection"} onClick={this.myListActive}>
+            <p
+              className={profile.ItemTitle + " " + profile.ItemTitleActive}
+              data-id={"MySection"}
+              onClick={this.myListActive}
+            >
               My Recipe
             </p>
-            <p className={profile.ItemTitle} data-id={"SavedSection"} onClick={this.myListActive}>
+            <p
+              className={profile.ItemTitle}
+              data-id={"SavedSection"}
+              onClick={this.myListActive}
+            >
               Saved Recipe
             </p>
-            <p className={profile.ItemTitle} data-id={"LikedSection"} onClick={this.myListActive}>
+            <p
+              className={profile.ItemTitle}
+              data-id={"LikedSection"}
+              onClick={this.myListActive}
+            >
               Liked Recipe
             </p>
           </div>
         </Container>
         <hr />
         <Container>
-          <div className={profile.ItemList + " " + profile.ItemListActive} id="MySection">
+          <div
+            className={profile.ItemList + " " + profile.ItemListActive}
+            id="MySection"
+          >
             <div className={profile.CardWrapper}>
-              {myrecipe && myrecipe.map(({ id_recipe, title, img }) => {
-                return (
-                  <>
-
-                    <div className={profile.CardList}>
-                      <Link to={{
-                        pathname: `/recipe/${id_recipe}`
-                      }}>
-                        <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
-                        <h1>{title}</h1>
-                      </Link>
-                      <div className='row'>
-                        <Link to={{ pathname: `/edit/${id_recipe}` }}>
+              {myrecipe &&
+                myrecipe.map(({ id_recipe, title, img }) => {
+                  return (
+                    <>
+                      <div className={profile.CardList}>
+                        <Link
+                          to={{
+                            pathname: `/recipe/${id_recipe}`,
+                          }}
+                        >
                           <img
-                            src={EditBtn}
-                            className={profile.EditButton}
+                            alt="img"
+                            src={baseUrl + img}
+                            style={{ width: "270px", height: "180px" }}
+                          />
+                          <h1>{title}</h1>
+                        </Link>
+                        <div className="row">
+                          <Link to={{ pathname: `/edit/${id_recipe}` }}>
+                            <img
+                              src={EditBtn}
+                              className={profile.EditButton}
+                              alt=""
+                              height="24px"
+                              width="24px"
+                            />
+                          </Link>
+                          <img
+                            src={DeleteBtn}
+                            className={profile.DeleteButton}
                             alt=""
+                            id={id_recipe}
                             height="24px"
                             width="24px"
+                            onClick={this.deleteRecipe}
                           />
-                        </Link>
-                        <img
-                          src={DeleteBtn}
-                          className={profile.DeleteButton}
-                          alt=""
-                          id={id_recipe}
-                          height="24px"
-                          width="24px"
-                          onClick={this.deleteRecipe}
-                        />
+                        </div>
                       </div>
-                    </div>
-                  </>
-                )
-              })
-              }
+                    </>
+                  );
+                })}
             </div>
           </div>
 
           <div className={profile.ItemList} id="SavedSection">
             <div className={profile.CardWrapper}>
-              {savedrecipe && savedrecipe.map(({ id_recipe, title, img }) => {
-                return (
-                  <>
-                    <Link to={{
-                      pathname: `/recipe/${id_recipe}`
-                    }}>
-                      <div href="/recipe" className={profile.CardList}>
-                        <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
-                        <h1>{title}</h1>
-                      </div>
-                    </Link>
-                  </>
-                );
-              })}
+              {savedrecipe &&
+                savedrecipe.map(({ id_recipe, title, img }) => {
+                  return (
+                    <>
+                      <Link
+                        to={{
+                          pathname: `/recipe/${id_recipe}`,
+                        }}
+                      >
+                        <div href="/recipe" className={profile.CardList}>
+                          <img
+                            alt="img"
+                            src={baseUrl + img}
+                            style={{ width: "270px", height: "180px" }}
+                          />
+                          <h1>{title}</h1>
+                        </div>
+                      </Link>
+                    </>
+                  );
+                })}
             </div>
           </div>
 
           <div className={profile.ItemList} id="LikedSection">
             <div className={profile.CardWrapper}>
-              {
-                likedrecipe && likedrecipe.map(({ id_recipe, title, img }) => {
+              {likedrecipe &&
+                likedrecipe.map(({ id_recipe, title, img }) => {
                   return (
                     <>
-                      <Link to={{
-                        pathname: `/recipe/${id_recipe}`
-                      }}>
+                      <Link
+                        to={{
+                          pathname: `/recipe/${id_recipe}`,
+                        }}
+                      >
                         <div href="/recipe" className={profile.CardList}>
-                          <img src={'http://127.0.0.1:8000/' + img} style={{ width: "270px", height: "180px" }} />
+                          <img
+                            alt="img"
+                            src={baseUrl + img}
+                            style={{ width: "270px", height: "180px" }}
+                          />
                           <h1>{title}</h1>
                         </div>
                       </Link>
                     </>
-                  )
-                })
-              }
+                  );
+                })}
             </div>
           </div>
         </Container>
@@ -330,18 +391,16 @@ class Profile extends Component {
             <Modal.Title>Change Profile Picture</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <input
-              type="file" name='img' onChange={this.handleFile}
-            />
-            <img src={this.state.img} />
+            <input type="file" name="img" onChange={this.handleFile} />
+            <img alt="img" src={this.state.img} />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
               Close
-			   			</Button>
+            </Button>
             <Button variant="primary" onClick={this.updatePhoto}>
               Apply Change
-			   			</Button>
+            </Button>
           </Modal.Footer>
         </Modal>
 
@@ -355,7 +414,7 @@ class Profile extends Component {
             <Form.Control
               type="password"
               name="old_password"
-              placeholder="Password"
+              placeholder="Old Password"
               value={old_password}
               onChange={this.pwHandler}
             />
@@ -363,7 +422,7 @@ class Profile extends Component {
             <Form.Control
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="New Password"
               value={password}
               onChange={this.pwHandler}
             />
@@ -371,7 +430,7 @@ class Profile extends Component {
             <Form.Control
               type="password"
               name="password_conf"
-              placeholder="Password"
+              placeholder="Confirmation Password"
               value={password_conf}
               onChange={this.pwHandler}
             />

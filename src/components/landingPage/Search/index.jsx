@@ -5,8 +5,6 @@ import { Col, Container, FormControl, InputGroup, Row } from "react-bootstrap";
 
 import "./style.css";
 
-const base_url = process.env.REACT_APP_BASE_URL;
-console.log("konto"+base_url);
 
 export default class Search extends Component {
   state = {
