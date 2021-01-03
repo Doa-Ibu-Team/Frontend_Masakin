@@ -15,13 +15,14 @@ import store from "../redux/store";
 import CodeReset from "./auth/CodeReset";
 import ResetPass from "./auth/ResetPass";
 import PrivateRoute from "../components/PrivateRoute";
+import PublicRoute from "../components/PublicRoute";
 
 const Router = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <PublicRoute restricted={false} exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/forgot-password" component={ForgotPass} />
