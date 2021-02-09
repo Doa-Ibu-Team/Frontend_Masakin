@@ -15,7 +15,7 @@
 - Add and update recipe
 - View user recipe
 - Like or bookmark some recipe
-- and etc.
+- and many more...
 
 ## Requirements for Development
 
