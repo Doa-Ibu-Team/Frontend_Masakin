@@ -52,16 +52,20 @@ BASE_URL = "http://localhost:8000"
 Here'e some picture about the project
 
 ##HomeScreen
+
 <img src="https://user-images.githubusercontent.com/70320451/107330676-78667380-6ae4-11eb-9947-58f3355240c0.jpg" />
 
 
 ##Profile
+
 <img src="https://user-images.githubusercontent.com/70320451/107330674-78667380-6ae4-11eb-936a-0665e101c091.jpg" />
 
 ##Recipe (1)
+
 <img src="https://user-images.githubusercontent.com/70320451/107330671-77cddd00-6ae4-11eb-846b-88ddd0d3a7f5.jpg" />
 
 
 ##Recipe (2)
+
 <img src="https://user-images.githubusercontent.com/70320451/107330664-76041980-6ae4-11eb-8a0f-e7a4035ec1b8.jpg" />
 
