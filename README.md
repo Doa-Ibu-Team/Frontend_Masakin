@@ -48,3 +48,6 @@ BASE_URL = "http://localhost:8000"
 5. Before run this project, you must configure and run backend. You can find backend for this project [here](https://github.com/Doa-Ibu-Team/Backend_MasakIn)
 6. Type `npm run server` in terminal for running backend.
 7. If you want to run this project, just type `npm start` then enter on your project folder
+
+<img src="https://user-images.githubusercontent.com/70320451/107330676-78667380-6ae4-11eb-9947-58f3355240c0.jpg" />
+
