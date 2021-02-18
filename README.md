@@ -52,7 +52,7 @@ BASE_URL = "http://localhost:8000"
 
 ## Related Project
 
-[`MasakIn-restAPI`](https://github.com/Doa-Ibu-Team/Backend_MasakIn)
+restAPI for this project [`MasakIn-restAPI`](https://github.com/Doa-Ibu-Team/Backend_MasakIn)
 
 Here'e some picture about the project
 
