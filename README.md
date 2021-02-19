@@ -5,6 +5,7 @@
 - [Features](#features)
 - [Requirements](#requirements-for-development)
 - [Installation](#installation-for-development)
+- [Screenshot](#screenshot)
 - [Related Project](#related-project)
 
 ## Description
@@ -50,6 +51,7 @@ BASE_URL = "http://localhost:8000"
 6. Type `npm run server` in terminal for running backend.
 7. If you want to run this project, just type `npm start` then enter on your project folder
 
+## Screenshot
 
 Here'e some picture about the project
 
