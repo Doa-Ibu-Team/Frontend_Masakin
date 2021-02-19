@@ -50,9 +50,6 @@ BASE_URL = "http://localhost:8000"
 6. Type `npm run server` in terminal for running backend.
 7. If you want to run this project, just type `npm start` then enter on your project folder
 
-## Related Project
-
-restAPI for this project [`MasakIn-restAPI`](https://github.com/Doa-Ibu-Team/Backend_MasakIn)
 
 Here'e some picture about the project
 
@@ -70,3 +67,6 @@ Here'e some picture about the project
 ## Recipe video
 <img src="https://user-images.githubusercontent.com/70320451/107330664-76041980-6ae4-11eb-8a0f-e7a4035ec1b8.jpg" />
 
+## Related Project
+
+restAPI for this project [`MasakIn-restAPI`](https://github.com/Doa-Ibu-Team/Backend_MasakIn)
