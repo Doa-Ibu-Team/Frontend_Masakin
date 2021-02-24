@@ -53,9 +53,9 @@ export default class Search extends Component {
                   aria-label="Search"
                   aria-describedby="basic-addon2"
                 />
-                <InputGroup.Append className="mr-2">
+                {/* <InputGroup.Append className="mr-2">
                   <FontAwesomeIcon className="icon-search" icon={faSearch} />
-                </InputGroup.Append>
+                </InputGroup.Append> */}
               </InputGroup>
             </Col>
             <Col md={4} className="bg-content">

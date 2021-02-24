@@ -15,7 +15,6 @@ import store from "../redux/store";
 import CodeReset from "./auth/CodeReset";
 import ResetPass from "./auth/ResetPass";
 import PrivateRoute from "../components/PrivateRoute";
-import PublicRoute from "../components/PublicRoute";
 
 const Router = () => {
   return (

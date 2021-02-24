@@ -13,6 +13,7 @@ export default function Home() {
       <Search />
       <PopularForYou />
       <NewRecipe />
+      <div style={{height:'100px'}} />
       <Popular />
       <Footer />
     </>

@@ -26,7 +26,7 @@ const xpostdata = ''
 
 class Detail extends Component {
 	state = {
-		recipe: [],
+		recipe: {},
 		comment: [],
 		liked: false,
 		saved: false,
